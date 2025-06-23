@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
+    <title>about</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            width: 1px;
+            height: 1px;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        .top-buttons {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        .top-button {
+            color: #fff;
+            font-family: monospace;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .top-button:hover {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+        }
+
+        .main-container {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: calc(100vh - 140px);
+            border: 1px solid #333;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        /* Mobile Responsive Design */
+        @media screen and (max-width: 768px) {
+            .main-container {
+                width: 90%;
+                padding: 20px;
+                top: 80px;
+                height: calc(100vh - 120px);
+            }
+
+            .top-buttons {
+                gap: 15px;
+            }
+
+            .top-button {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .main-container {
+                padding: 15px;
+                top: 70px;
+                height: calc(100vh - 100px);
+            }
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .bottom-left-image {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 222px;
+            height: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-left-image:hover {
+            opacity: 1;
+        }
+    </style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="top-buttons">
+        <a href="https://2264.pw" class="top-button">home</a>
+        <a href="https://2264.pw/posts" class="top-button">posts</a>
+        <a href="https://2264.pw/about" class="top-button">about</a>
+    </div>
+
+    <div class="main-container">
+    </div>
+
+    <div class="copyright">© 2264.pw</div>
+
+    <script>
+        
+        createStars();
+        checkElementPositions();
+
+        function createStars() {
+            const stars = document.querySelector('.stars');
+            const count = 200;
+
+            stars.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                createStar(stars);
+            }
+        }
+
+        
+        window.addEventListener('resize', createStars);
+
+        function createStar(container) {
+            const element = document.createElement('div');
+            element.classList.add('star');
+            resetElement(element);
+            container.appendChild(element);
+            animateStar(element);
+        }
+
+        function resetElement(element) {
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+        }
+
+        function animateStar(star) {
+            // movement animation
+            star.animate([
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ], {
+                duration: Math.random() * 3000 + 3000,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            // opacity animation
+            star.animate([
+                { opacity: Math.random() * 0.5 + 0.1 },
+                { opacity: Math.random() * 0.3 + 0.7 },
+                { opacity: Math.random() * 0.5 + 0.1 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+        }
+
+        function checkElementPositions() {
+            const elements = document.querySelectorAll('.star');
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
+                    resetElement(element);
+                    animateStar(element);
+                }
+            });
+
+            requestAnimationFrame(checkElementPositions);
+        }
+    </script>
+</body>
+</html>

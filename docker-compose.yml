@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    networks:
+      - nginx-docker
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /root/nginx-docker/html:/usr/share/nginx/html
+      - ./certs:/etc/nginx/certs
+    restart: unless-stopped
+
+networks:
+  nginx-docker:
+    external: true
