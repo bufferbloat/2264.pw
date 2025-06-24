@@ -94,38 +94,133 @@
             top: 90px;
             left: 50%;
             transform: translateX(-50%);
-            width: 1000px;
+            width: 1400px;
             height: calc(100vh - 140px);
-            border: 1px solid #333;
-            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             padding: 40px;
             box-sizing: border-box;
             overflow-y: auto;
-            justify-content: center;
+            gap: 15px;
             align-items: center;
         }
 
-        
+        .blog-post {
+            width: 48%;
+            height: 220px;
+            border: 1px solid #333333;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-2px);
+            border-color: #444;
+        }
+
+        .blog-post:nth-child(odd) {
+            align-self: flex-start;
+            transform: translateX(-40px) translateY(0);
+        }
+
+        .blog-post:nth-child(even) {
+            align-self: flex-end;
+            transform: translateX(40px) translateY(-30px);
+        }
+
+        .blog-post:nth-child(odd):hover {
+            transform: translateX(-40px) translateY(-2px);
+        }
+
+        .blog-post:nth-child(even):hover {
+            transform: translateX(40px) translateY(-32px);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-title-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .post-title {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .new-label {
+            font-size: 12px;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .post-date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .post-preview {
+            position: absolute;
+            left: 25px;
+            right: 25px;
+            top: 70px;
+            bottom: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.2;
+            text-align: left;
+            overflow: hidden;
+            max-height: calc(100% - 85px);
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .view-count::before {
+            content: "👁 ";
+            margin-right: 4px;
+        }
+
         @media screen and (max-width: 768px) {
             .main-container {
                 width: 90%;
                 padding: 20px;
-                top: 80px;
-                height: calc(100vh - 120px);
             }
 
-            .top-buttons {
-                gap: 15px;
+            .blog-post {
+                width: 95%;
             }
 
-            .top-button {
-                font-size: 14px;
+            .blog-post:nth-child(odd),
+            .blog-post:nth-child(even) {
+                transform: none;
             }
 
-            .no-posts-message {
-                font-size: 14px;
+            .blog-post:nth-child(odd):hover,
+            .blog-post:nth-child(even):hover {
+                transform: translateY(-2px);
             }
         }
 
@@ -179,7 +274,40 @@
     </div>
 
     <div class="main-container">
-        <div class="no-posts-message">No post yet lol</div>
+        <a href="/posts/first-post" class="blog-post">
+            <div class="post-header">
+                <div class="post-title-group">
+                    <div class="post-title">Nothing ever happens</div>
+                    <div class="new-label">New</div>
+                </div>
+                <div class="post-date">24.06.2025</div>
+            </div>
+            <div class="post-preview">
+                meow coolest thing ever
+            </div>
+        </a>
+
+        <!-- template for future posts
+        <a href="/posts/second-post" class="blog-post">
+            <div class="post-header">
+                <div class="post-title">2</div>
+                <div class="post-date">...</div>
+            </div>
+            <div class="post-preview">
+                meow
+            </div>
+        </a>
+
+        <a href="/posts/third-post" class="blog-post">
+            <div class="post-header">
+                <div class="post-title">3</div>
+                <div class="post-date">...</div>
+            </div>
+            <div class="post-preview">
+                meow
+            </div>
+        </a>
+        -->
     </div>
 
     <div class="copyright">© 2264.pw</div>
