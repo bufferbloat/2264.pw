@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
-    <title>about</title>
+    <title>files</title>
     <style>
         body {
             margin: 0;
@@ -15,21 +15,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
             position: relative;
             opacity: 0;
             animation: fadeInPage 0.8s ease-out forwards;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         @keyframes fadeInPage {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .stars {
@@ -53,21 +48,13 @@
         }
 
         @keyframes twinkle {
-            0% {
-                opacity: 0.5;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0.5;
-            }
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
 
         .top-buttons {
-            position: fixed;
+            position: absolute;
             top: 40px;
             left: 50%;
             transform: translateX(-50%);
@@ -90,68 +77,28 @@
         }
 
         .main-container {
-            position: fixed;
-            top: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-            height: calc(100vh - 140px);
-            border: 1px solid #333;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
+            position: relative;
+            width: 1400px;
+            margin-top: 90px;
+            margin-bottom: 40px;
+            border: 1px solid #333333;
+            background-color: #000000b3;
             padding: 40px;
             box-sizing: border-box;
-            overflow-y: auto;
-        }
-
-        /* Mobile Responsive Design */
-        @media screen and (max-width: 768px) {
-            .main-container {
-                width: 90%;
-                padding: 20px;
-                top: 80px;
-                height: calc(100vh - 120px);
-            }
-
-            .top-buttons {
-                gap: 15px;
-            }
-
-            .top-button {
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .main-container {
-                padding: 15px;
-                top: 70px;
-                height: calc(100vh - 100px);
-            }
         }
 
         .copyright {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            margin-bottom: 20px;
             color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
         }
 
-        .bottom-left-image {
-            position: fixed;
-            bottom: 0px;
-            left: 0px;
-            width: 222px;
-            height: auto;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .bottom-left-image:hover {
-            opacity: 1;
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            background: #00000000;
         }
     </style>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -161,19 +108,16 @@
     <div class="top-buttons">
         <a href="https://2264.pw" class="top-button">home</a>
         <a href="https://2264.pw/posts" class="top-button">posts</a>
-        <a href="https://2264.pw/about" class="top-button">about</a>
+        <a href="https://2264.pw/files" class="top-button">files</a>
     </div>
 
     <div class="main-container">
+        <iframe src="src/" frameborder="0"></iframe>
     </div>
 
     <div class="copyright">© 2264.pw</div>
 
     <script>
-        
-        createStars();
-        checkElementPositions();
-
         function createStars() {
             const stars = document.querySelector('.stars');
             const count = 200;
@@ -184,7 +128,6 @@
             }
         }
 
-        
         window.addEventListener('resize', createStars);
 
         function createStar(container) {
@@ -201,7 +144,6 @@
         }
 
         function animateStar(star) {
-            // movement animation
             star.animate([
                 { transform: 'translate(0, 0)' },
                 { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
@@ -212,7 +154,6 @@
                 easing: 'ease-in-out'
             });
 
-            // opacity animation
             star.animate([
                 { opacity: Math.random() * 0.5 + 0.1 },
                 { opacity: Math.random() * 0.3 + 0.7 },
@@ -225,21 +166,7 @@
             });
         }
 
-        function checkElementPositions() {
-            const elements = document.querySelectorAll('.star');
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
-                    resetElement(element);
-                    animateStar(element);
-                }
-            });
-
-            requestAnimationFrame(checkElementPositions);
-        }
+        createStars();
     </script>
 </body>
 </html>

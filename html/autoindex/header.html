@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background: #00000000;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 15px;
+        }
+
+
+        h1 {
+            font-size: 18px;
+            font-weight: normal;
+            margin: 0 0 15px 0;
+            opacity: 1;
+        }
+
+        pre {
+            margin: 0;
+            font-family: monospace;
+            position: relative;
+            width: 100%;
+        }
+
+
+        a[href$="/"]:before {
+            content: "📁";
+            margin-right: 8px;
+            opacity: 1;
+        }
+
+        a:not([href$="/"]):before {
+            content: "📄";
+            margin-right: 8px;
+            opacity: 1;
+        }
+
+        a[href="../"]:before {
+            content: "⬅️";
+            margin-right: 8px;
+        }
+
+        a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+
+        pre br {
+            display: none;
+        }
+
+        pre {
+            white-space: pre;
+        }
+
+        pre a {
+            margin-right: 50px;
+        }
+
+
+        pre a:after {
+            content: "";
+            display: inline-block;
+            width: 600px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body> 

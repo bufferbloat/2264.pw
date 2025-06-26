@@ -204,7 +204,7 @@
             width: 700px;
             height: calc(100vh - 140px);
             border: 1px solid #333;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #000000b3;
             display: flex;
             flex-direction: column;
             padding: 40px;
@@ -349,7 +349,7 @@
     <div class="top-buttons">
         <a href="https://2264.pw" class="top-button">home</a>
         <a href="https://2264.pw/posts" class="top-button">posts</a>
-        <a href="https://2264.pw/about" class="top-button">about</a>
+        <a href="https://2264.pw/files" class="top-button">files</a>
     </div>
     
     <div class="main-container">
@@ -431,7 +431,7 @@
     </div>
 
     <div class="copyright">© 2264.pw</div>
-    <img src="https://files.catbox.moe/no8nc4.png" alt="decoration" class="bottom-left-image">
+    <img src="assets/img/no8nc4.png" alt="decoration" class="bottom-left-image">
 
     <script>
         // Create stars immediately when the script loads
@@ -448,7 +448,7 @@
             }
         }
 
-        // Add window resize handler to recreate stars when window size changes
+        // 
         window.addEventListener('resize', createStars);
 
         function createStar(container) {
@@ -507,7 +507,7 @@
         }
 
 
-        // Uptime calculation and animation
+        // Uptime
         const startDate = new Date('2024-11-29T00:00:00+01:00'); // System start date
 
         function calculateUptime() {
@@ -540,7 +540,7 @@
             const uptimeElement = document.querySelector('.typing-text');
             const newUptime = calculateUptime();
 
-            // Always animate on first load
+            // 
             if (uptimeElement.textContent === 'Loading...') {
                 animateText(uptimeElement, newUptime);
             } else if (uptimeElement.textContent !== newUptime) {
@@ -548,7 +548,7 @@
             }
         }
 
-        // Initialize uptime and start the update cycle
+        // 
         updateUptime();
         setInterval(updateUptime, 60000);
     </script>
