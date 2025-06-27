@@ -9,6 +9,11 @@
             margin: 0;
             padding: 0;
             background-color: #000;
+            background-image: url('assets/img/2264.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: #fff;
             font-family: monospace;
             min-height: 100vh;
@@ -20,6 +25,7 @@
             position: relative;
             opacity: 0;
             animation: fadeInPage 0.8s ease-out forwards;
+            transition: background 0.5s ease;
         }
 
         @keyframes fadeInPage {
@@ -86,7 +92,7 @@
         }
 
         .top-button:hover {
-            color: rgba(255, 255, 255, 0.6);
+            color: #c7c7c7;
             text-decoration: none;
         }
 
@@ -149,15 +155,14 @@
             position: fixed;
             bottom: 0px;
             left: 0px;
-            width: 222px;
+            width: 190px;
             height: auto;
-            opacity: 0.7;
+            opacity: 1;
             transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
-        .bottom-left-image:hover {
-            opacity: 1;
-        }
+
 
         @keyframes deleteChar {
             from {
@@ -341,10 +346,37 @@
                 width: 120px;
             }
         }
+
+        .bg-nebula {
+            background-image: url('assets/img/2264.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .bg-toggle {
+            position: fixed;
+            bottom: 235px;
+            left: 150px;
+            width: 88px;
+            height: 31px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            object-fit: contain;
+            opacity: 0;
+        }
+
+        .bg-toggle:hover {
+            opacity: 1;
+        }
+
     </style>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <img src="assets/img/2264_btn2.gif" alt="Toggle Background" class="bg-toggle" id="bgToggle">
     <div class="stars"></div>
     <div class="top-buttons">
         <a href="https://2264.pw" class="top-button">home</a>
@@ -551,6 +583,44 @@
         // 
         updateUptime();
         setInterval(updateUptime, 60000);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const bgToggle = document.getElementById('bgToggle');
+            let isNebula = false;
+
+            // Set initial state
+            body.style.backgroundColor = '#000';
+            body.style.backgroundImage = 'none';
+            bgToggle.src = 'assets/img/2264_btn1.gif';
+
+            function toggleBackground() {
+                isNebula = !isNebula;
+                if (isNebula) {
+                    body.style.backgroundImage = 'url("assets/img/2264.png")';
+                    body.style.backgroundSize = 'cover';
+                    body.style.backgroundPosition = 'center';
+                    body.style.backgroundRepeat = 'no-repeat';
+                    body.style.backgroundAttachment = 'fixed';
+                    bgToggle.src = 'assets/img/2264_btn2.gif';
+                } else {
+                    body.style.backgroundColor = '#000';
+                    body.style.backgroundImage = 'none';
+                    bgToggle.src = 'assets/img/2264_btn1.gif';
+                }
+            }
+
+            // Button click handler
+            bgToggle.addEventListener('click', toggleBackground);
+
+            // Double click handler for the body
+            body.addEventListener('dblclick', function(e) {
+                // Only toggle if the click is directly on the body, not on other elements
+                if (e.target === body) {
+                    toggleBackground();
+                }
+            });
+        });
     </script>
 </body>
 </html>
