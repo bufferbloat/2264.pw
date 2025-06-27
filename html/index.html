@@ -155,8 +155,8 @@
             position: fixed;
             bottom: 0px;
             left: 0px;
-            width: 190px;
-            height: auto;
+            width: 255px;
+            height: 308px;
             opacity: 1;
             transition: opacity 0.3s ease;
             z-index: 1;
@@ -189,8 +189,8 @@
             overflow: hidden;
             white-space: nowrap;
             border-right: 2px solid transparent;
-            vertical-align: middle; /* Ensures alignment with the label */
-            margin-left: 5px; /* Adds spacing between the label and the text */
+            vertical-align: middle; 
+            margin-left: 5px; 
         }
 
             .typing-text.deleting {
@@ -539,8 +539,8 @@
         }
 
 
-        // Uptime
-        const startDate = new Date('2024-11-29T00:00:00+01:00'); // System start date
+        // 
+        const startDate = new Date('2024-11-29T00:00:00+01:00'); // 
 
         function calculateUptime() {
             const now = new Date();
@@ -589,7 +589,7 @@
             const bgToggle = document.getElementById('bgToggle');
             let isNebula = false;
 
-            // Set initial state
+            // initial state
             body.style.backgroundColor = '#000';
             body.style.backgroundImage = 'none';
             bgToggle.src = 'assets/img/2264_btn1.gif';
@@ -610,12 +610,12 @@
                 }
             }
 
-            // Button click handler
+            // button click
             bgToggle.addEventListener('click', toggleBackground);
 
-            // Double click handler for the body
+            // double click 
             body.addEventListener('dblclick', function(e) {
-                // Only toggle if the click is directly on the body, not on other elements
+                // 
                 if (e.target === body) {
                     toggleBackground();
                 }
