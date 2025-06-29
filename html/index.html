@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             background-color: #000;
-            background-image: url('assets/img/2264.png');
+            background-image: none;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -20,12 +20,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
             opacity: 0;
             animation: fadeInPage 0.8s ease-out forwards;
-            transition: background 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         @keyframes fadeInPage {
@@ -97,40 +96,14 @@
         }
 
         .content {
+            margin-top: 90px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            gap: 20px;
             justify-content: center;
-            height: 100vh;
-        }
-
-        .system-info-box {
-            position: fixed;
-            top: 80px;
-            right: 80px;
-            border: 1px solid #333;
-            padding: 10px 15px;
-            font-family: monospace;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-        }
-
-        .system-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .system-info div {
-            white-space: pre;
-        }
-
-        .red {
-            color: #ff0000;
-        }
-
-        .white {
-            color: #ffffff;
+            align-items: flex-start;
+            width: fit-content;
+            position: relative;
         }
 
         a {
@@ -184,30 +157,9 @@
             }
         }
 
-        .typing-text {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid transparent;
-            vertical-align: middle; 
-            margin-left: 5px; 
-        }
-
-            .typing-text.deleting {
-                animation: deleteChar 1s steps(30, end);
-            }
-
-            .typing-text.typing {
-                animation: typeChar 1s steps(30, end);
-            }
-
         .main-container {
-            position: fixed;
-            top: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-            height: calc(100vh - 140px);
+            width: 650px;
+            height: 750px;
             border: 1px solid #333;
             background-color: #000000b3;
             display: flex;
@@ -215,8 +167,100 @@
             padding: 40px;
             box-sizing: border-box;
             overflow-y: auto;
+            position: relative;
         }
 
+        
+        .widgets-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* main widget style */
+        .widget-box {
+            width: 250px;
+            height: 200px;
+            border: 1px solid #333;
+            background-color: #000000b3;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* individual widget styles */
+        .widget-lastfm {
+            height: 150px;
+        }
+
+
+        /* last.fm widget https://github.com/biancarosa/lastfm-last-played */
+        #listening {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 15px;
+            color: #fff;
+            padding: 0px;
+        }
+
+        #listening .now-playing-text {
+            font-size: 15px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        #listening .content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        #listening img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 0px;
+        }
+
+        #trackInfo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0px;
+        }
+
+        #trackName {
+            font-size: 14px;
+            margin: 0;
+            color: #fff;
+        }
+
+        #artistName {
+            font-size: 12px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+
+  /*      
+        @media screen and (max-width: 1400px) {
+            .widget-box {
+                width: 220px;
+                height: 180px;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .widgets-container {
+                display: none; /* Hide widgets on smaller screens 
+            }
+        }
+*/
         .section {
             margin-bottom: 20px;
         }
@@ -376,6 +420,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+    
+    <link rel="preload" href="assets/img/2264.png" as="image">
+    
     <img src="assets/img/2264_btn2.gif" alt="Toggle Background" class="bg-toggle" id="bgToggle">
     <div class="stars"></div>
     <div class="top-buttons">
@@ -384,89 +431,90 @@
         <a href="https://2264.pw/files" class="top-button">files</a>
     </div>
     
-    <div class="main-container">
-        <div class="section">
-            <h1 class="section-title">hi, i'm Way</h1>
-            <div class="section-content">
-                developer based in France, 
-                mostly interested in low-level programming, embedded systems and operating systems.<br>
-                <br>
-                feel free to dm me on <a href="https://twitter.com/bufferbloat" class="project-link" target="_blank">twitter</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">projects</h2>
-            <div class="section-content">
-                most of my projects are private for the moment</a>
-                <br><br>
-            </div>
-            <div class="projects-list">
-                <div class="project-item">
-                    <a href="#" class="project-link">WAY CLIENT</a>: Windows optimization tool designed to enhance gaming responsiveness by reducing input latency and improving system efficiency.
-                </div>
-                <div class="project-item">
-                    <a href="#" class="project-link">Yoda Bot</a>: Discord bot named after my dog for personal server and learning purposes.
-                </div>
-                <div class="project-item">
-                    <a href="#" class="project-link"></a>
-                </div>
-                <div class="project-item">
-                    <a href="#" class="project-link"></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>languages</h3>
-                    <ul>
-                        <li>C/C++</li>
-                        <li></li>
-                        <li>Python</li>
-                        <li>JavaScript/TypeScript</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>frameworks & tools</h3>
-                    <ul>                     
-                        <li>React</li>
-                        <li>NextJS</li>
-                        <li>NodeJS</li>
-                        <li>Linux</li>
-                        <li>Docker</li>
-                        <li>Git</li>
-                        <li>PostgreSQL</li>
-                    </ul>
-                </div>
-                <div class="skill-category"></div>
-                
-            </div>
-        </div>
-    </div>
-
     <div class="content">
-    </div>
+        <div class="main-container">
+            <div class="section">
+                <h1 class="section-title">hi, i'm Way</h1>
+                <div class="section-content">
+                    developer based in France, 
+                    mostly interested in low-level programming, embedded systems and operating systems.<br>
+                    <br>
+                    feel free to dm me on <a href="https://twitter.com/bufferbloat" class="project-link" target="_blank">twitter</a>
+                </div>
+            </div>
 
-    <div class="system-info-box">
-        <div class="system-info">
-            <div><span class="red">OS: </span><span class="white">Ubuntu 24.04.1 LTS x86_64</span></div>
-            <div><span class="red">Kernel: </span><span class="white">6.8.0-49</span></div>
-            <div><span class="red">Uptime: </span><span class="white typing-text">Loading...</span></div>
-            <div><span class="red">Packages: </span><span class="white">798</span></div>
-            <div><span class="red">Shell: </span><span class="white">bash 5.2.21</span></div>
-            <div><span class="red">CPU: </span><span class="white">AMD EPYC 7443</span></div>
-            <div><span class="red">Memory: </span><span class="white">15993MiB</span></div>
+            <div class="section">
+                <h2 class="section-title">projects</h2>
+                <div class="section-content">
+                    most of my projects are private for the moment</a>
+                    <br><br>
+                </div>
+                <div class="projects-list">
+                    <div class="project-item">
+                        <a href="#" class="project-link">WAY CLIENT</a>: Windows optimization tool designed to enhance gaming responsiveness by reducing input latency and improving system efficiency.
+                    </div>
+                    <div class="project-item">
+                        <a href="#" class="project-link">Yoda Bot</a>: Discord bot named after my dog for personal server and learning purposes.
+                    </div>
+                    <div class="project-item">
+                        <a href="#" class="project-link"></a>
+                    </div>
+                    <div class="project-item">
+                        <a href="#" class="project-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>languages</h3>
+                        <ul>
+                            <li>C/C++</li>
+                            <li></li>
+                            <li>Python</li>
+                            <li>JavaScript/TypeScript</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>frameworks & tools</h3>
+                        <ul>                     
+                            <li>React</li>
+                            <li>NextJS</li>
+                            <li>NodeJS</li>
+                            <li>Linux</li>
+                            <li>Docker</li>
+                            <li>Git</li>
+                            <li>PostgreSQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="widgets-container">
+            <div class="widget-box widget-lastfm" id="widget1">
+                <div id="listening">
+                    <div class="no-song-playing">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- wip widgets :D 
+            <div class="widget-box widget-other" id="widget2"></div>
+            <div class="widget-box widget-other" id="widget3"></div>
+            -->
         </div>
     </div>
 
     <div class="copyright">© 2264.pw</div>
     <img src="assets/img/no8nc4.png" alt="decoration" class="bottom-left-image">
 
+    <script src="js/lastfm-widget.js"></script>
     <script>
-        // Create stars immediately when the script loads
+        // 
         createStars();
         checkElementPositions();
 
@@ -539,57 +587,14 @@
         }
 
 
-        // 
-        const startDate = new Date('2024-11-29T00:00:00+01:00'); // 
 
-        function calculateUptime() {
-            const now = new Date();
-            const diff = now - startDate;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            return `${days} days`;
-        }
-
-        function animateText(element, newText) {
-            return new Promise(resolve => {
-                element.classList.add('deleting');
-                element.textContent = 'Loading...';
-
-                setTimeout(() => {
-                    element.textContent = '';
-                    element.classList.remove('deleting');
-                    element.classList.add('typing');
-                    element.textContent = newText;
-
-                    setTimeout(() => {
-                        element.classList.remove('typing');
-                        resolve();
-                    }, 1000);
-                }, 1000);
-            });
-        }
-
-        function updateUptime() {
-            const uptimeElement = document.querySelector('.typing-text');
-            const newUptime = calculateUptime();
-
-            // 
-            if (uptimeElement.textContent === 'Loading...') {
-                animateText(uptimeElement, newUptime);
-            } else if (uptimeElement.textContent !== newUptime) {
-                animateText(uptimeElement, newUptime);
-            }
-        }
-
-        // 
-        updateUptime();
-        setInterval(updateUptime, 60000);
 
         document.addEventListener('DOMContentLoaded', function() {
             const body = document.body;
             const bgToggle = document.getElementById('bgToggle');
             let isNebula = false;
 
-            // initial state
+            // initial state - setting black background immediately
             body.style.backgroundColor = '#000';
             body.style.backgroundImage = 'none';
             bgToggle.src = 'assets/img/2264_btn1.gif';
@@ -598,13 +603,8 @@
                 isNebula = !isNebula;
                 if (isNebula) {
                     body.style.backgroundImage = 'url("assets/img/2264.png")';
-                    body.style.backgroundSize = 'cover';
-                    body.style.backgroundPosition = 'center';
-                    body.style.backgroundRepeat = 'no-repeat';
-                    body.style.backgroundAttachment = 'fixed';
                     bgToggle.src = 'assets/img/2264_btn2.gif';
                 } else {
-                    body.style.backgroundColor = '#000';
                     body.style.backgroundImage = 'none';
                     bgToggle.src = 'assets/img/2264_btn1.gif';
                 }
@@ -615,7 +615,7 @@
 
             // double click 
             body.addEventListener('dblclick', function(e) {
-                // 
+                // Only toggle if clicking directly on body
                 if (e.target === body) {
                     toggleBackground();
                 }
