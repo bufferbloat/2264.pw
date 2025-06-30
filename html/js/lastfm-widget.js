@@ -1,7 +1,16 @@
 // this script is under the MIT license (https://max.nekoweb.org/resources/license.txt)
 
-const USERNAME = "wayclient"; 
+const USERNAME = "wayclient";
 const BASE_URL = `https://lastfm-last-played.biancarosa.com.br/${USERNAME}/latest-song`;
+let lastSuccessfulTrack = null; // cache the last successful track
+
+
+const updateWidgetContent = (content) => {
+    const widget = document.getElementById("listening");
+    if (widget) {
+        widget.innerHTML = content;
+    }
+};
 
 const getTrack = async () => {
     try {
@@ -15,10 +24,12 @@ const getTrack = async () => {
             throw new Error('No track data received');
         }
 
+        // cache successful response 
+        lastSuccessfulTrack = json;
+
         let isPlaying = json.track['@attr']?.nowplaying || false;
         
-        // always show track info show status text
-        document.getElementById("listening").innerHTML = `
+        updateWidgetContent(`
         <p class="now-playing-text">${isPlaying ? 'now listening' : 'last listened'}</p>
         <div class="content-wrapper">
             <img src="${json.track.image[1]['#text']}" alt="Album cover">
@@ -27,17 +38,25 @@ const getTrack = async () => {
                 <p id="artistName">${json.track.artist['#text']}</p>
             </div>
         </div>
-        `;
+        `);
     } catch (error) {
-        console.error('Error fetching Last.fm data:', error);
-        document.getElementById("listening").innerHTML = `
+       
+        if (lastSuccessfulTrack) {
+            getTrack(); 
+            return;
+        }
+
+        updateWidgetContent(`
         <div class="no-song-playing">
             <p>Error loading Last.fm data</p>
             <p style="font-size: 10px; opacity: 0.7;">${error.message}</p>
         </div>
-        `;
+        `);
     }
 };
 
+
 getTrack();
-setInterval(() => { getTrack(); }, 10000); 
+
+ 
+setInterval(getTrack, 10000); 

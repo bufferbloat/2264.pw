@@ -23,7 +23,7 @@
             overflow-x: hidden;
             position: relative;
             opacity: 0;
-            animation: fadeInPage 0.8s ease-out forwards;
+            animation: fadeInPage 1.5s ease-out forwards;
             transition: all 0.5s ease;
         }
 
@@ -225,6 +225,7 @@
             height: 64px;
             object-fit: cover;
             border-radius: 0px;
+            background-color: rgba(255, 255, 255, 0.1); /* Fallback background for missing images */
         }
 
         #trackInfo {
@@ -496,11 +497,7 @@
         
         <div class="widgets-container">
             <div class="widget-box widget-lastfm" id="widget1">
-                <div id="listening">
-                    <div class="no-song-playing">
-                        <p>Loading...</p>
-                    </div>
-                </div>
+                <div id="listening"></div>
             </div>
             <!-- wip widgets :D 
             <div class="widget-box widget-other" id="widget2"></div>
