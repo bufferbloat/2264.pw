@@ -12,7 +12,6 @@
     
     <link rel="preload" href="assets/img/2264.png" as="image">
     
-    <img src="assets/img/2264_btn2.gif" alt="Toggle Background" class="bg-toggle" id="bgToggle">
     <div class="stars"></div>
     <div class="top-buttons">
         <a href="https://2264.pw" class="top-button">home</a>
@@ -97,12 +96,55 @@
         </div>
     </div>
 
-    <div class="copyright">© 2264.pw</div>
+    <!-- Include footer -->
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+                
+                initBackgroundToggle();
+            });
+    </script>
+
+    <script>
+        function initBackgroundToggle() {
+            const bgToggle = document.getElementById('bgToggle');
+            let isNebula = false;
+
+            
+            document.body.style.backgroundColor = '#000';
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundAttachment = 'fixed';
+
+            function toggleBackground() {
+                isNebula = !isNebula;
+                if (isNebula) {
+                    document.body.style.backgroundImage = 'url("assets/img/2264.png")';
+                } else {
+                    document.body.style.backgroundImage = 'none';
+                }
+            }
+
+            
+            bgToggle.addEventListener('click', toggleBackground);
+
+            
+            document.body.addEventListener('dblclick', function(e) {
+                if (e.target === document.body) {
+                    toggleBackground();
+                }
+            });
+        }
+    </script>
 
     <script src="js/lastfm-widget.js"></script>
     <script src="https://status.cafe/current-status.js?name=way" defer></script>
     <script>
-        // 
+        // stars init
         createStars();
         checkElementPositions();
 
@@ -116,7 +158,6 @@
             }
         }
 
-        // 
         window.addEventListener('resize', createStars);
 
         function createStar(container) {
@@ -133,7 +174,6 @@
         }
 
         function animateStar(star) {
-            // Movement animation
             star.animate([
                 { transform: 'translate(0, 0)' },
                 { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
@@ -144,7 +184,6 @@
                 easing: 'ease-in-out'
             });
 
-            // Opacity animation
             star.animate([
                 { opacity: Math.random() * 0.5 + 0.1 },
                 { opacity: Math.random() * 0.3 + 0.7 },
@@ -156,7 +195,6 @@
                 easing: 'ease-in-out'
             });
         }
-
 
         function checkElementPositions() {
             const elements = document.querySelectorAll('.star');
@@ -173,42 +211,6 @@
 
             requestAnimationFrame(checkElementPositions);
         }
-
-
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const body = document.body;
-            const bgToggle = document.getElementById('bgToggle');
-            let isNebula = false;
-
-            // initial state - setting black background immediately
-            body.style.backgroundColor = '#000';
-            body.style.backgroundImage = 'none';
-            bgToggle.src = 'assets/img/2264_btn1.gif';
-
-            function toggleBackground() {
-                isNebula = !isNebula;
-                if (isNebula) {
-                    body.style.backgroundImage = 'url("assets/img/2264.png")';
-                    bgToggle.src = 'assets/img/2264_btn2.gif';
-                } else {
-                    body.style.backgroundImage = 'none';
-                    bgToggle.src = 'assets/img/2264_btn1.gif';
-                }
-            }
-
-            // button click
-            bgToggle.addEventListener('click', toggleBackground);
-
-            // double click 
-            body.addEventListener('dblclick', function(e) {
-                // Only toggle if clicking directly on body
-                if (e.target === body) {
-                    toggleBackground();
-                }
-            });
-        });
     </script>
 </body>
 </html>

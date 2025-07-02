@@ -19,9 +19,51 @@
         <iframe src="src/" frameborder="0"></iframe>
     </div>
 
-    <div class="copyright">© 2264.pw</div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+                initBackgroundToggle();
+            });
+    </script>
 
     <script>
+        function initBackgroundToggle() {
+            const bgToggle = document.getElementById('bgToggle');
+            let isNebula = false;
+
+            document.body.style.backgroundColor = '#000';
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundAttachment = 'fixed';
+
+            function toggleBackground() {
+                isNebula = !isNebula;
+                if (isNebula) {
+                    document.body.style.backgroundImage = 'url("assets/img/2264.png")';
+                } else {
+                    document.body.style.backgroundImage = 'none';
+                }
+            }
+
+            bgToggle.addEventListener('click', toggleBackground);
+
+            document.body.addEventListener('dblclick', function(e) {
+                if (e.target === document.body) {
+                    toggleBackground();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // stars init
+        createStars();
+        checkElementPositions();
+
         function createStars() {
             const stars = document.querySelector('.stars');
             const count = 200;
@@ -70,7 +112,21 @@
             });
         }
 
-        createStars();
+        function checkElementPositions() {
+            const elements = document.querySelectorAll('.star');
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
+                    resetElement(element);
+                    animateStar(element);
+                }
+            });
+
+            requestAnimationFrame(checkElementPositions);
+        }
     </script>
 </body>
 </html>

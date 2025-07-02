@@ -27,34 +27,50 @@
                 coolest thing ever (still building the posts section)
             </div>
         </a>
-
-        <!-- template for future posts
-        <a href="/posts/second-post" class="blog-post">
-            <div class="post-header">
-                <div class="post-title">2</div>
-                <div class="post-date">...</div>
-            </div>
-            <div class="post-preview">
-                meow
-            </div>
-        </a>
-
-        <a href="/posts/third-post" class="blog-post">
-            <div class="post-header">
-                <div class="post-title">3</div>
-                <div class="post-date">...</div>
-            </div>
-            <div class="post-preview">
-                meow
-            </div>
-        </a>
-        -->
     </div>
 
-    <div class="copyright">© 2264.pw</div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+                initBackgroundToggle();
+            });
+    </script>
 
     <script>
-       
+        function initBackgroundToggle() {
+            const bgToggle = document.getElementById('bgToggle');
+            let isNebula = false;
+
+            document.body.style.backgroundColor = '#000';
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundAttachment = 'fixed';
+
+            function toggleBackground() {
+                isNebula = !isNebula;
+                if (isNebula) {
+                    document.body.style.backgroundImage = 'url("assets/img/2264.png")';
+                } else {
+                    document.body.style.backgroundImage = 'none';
+                }
+            }
+
+            bgToggle.addEventListener('click', toggleBackground);
+
+            document.body.addEventListener('dblclick', function(e) {
+                if (e.target === document.body) {
+                    toggleBackground();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // stars init
         createStars();
         checkElementPositions();
 
@@ -67,7 +83,6 @@
                 createStar(stars);
             }
         }
-
 
         window.addEventListener('resize', createStars);
 
@@ -85,7 +100,6 @@
         }
 
         function animateStar(star) {
-            // Movement animation
             star.animate([
                 { transform: 'translate(0, 0)' },
                 { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
@@ -96,7 +110,6 @@
                 easing: 'ease-in-out'
             });
 
-            // Opacity animation
             star.animate([
                 { opacity: Math.random() * 0.5 + 0.1 },
                 { opacity: Math.random() * 0.3 + 0.7 },
