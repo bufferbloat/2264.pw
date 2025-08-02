@@ -248,7 +248,7 @@
     <div class="post-container">
         <div class="post-header">
             <div class="post-title">Nothing ever happens</div>
-            <div class="post-date">24.06.2025</div>
+            <div class="post-date">Saturday, 2 August 2025</div>
         </div>
         <div class="post-content" id="content">
 Hello hello
@@ -344,8 +344,6 @@ emoji :joy: :heart: :thumbsup:
 
     </div>
 
-    <div class="copyright">© 2264.pw</div>
-
     <script>
         // marked
         marked.setOptions({
@@ -429,5 +427,16 @@ emoji :joy: :heart: :thumbsup:
 
         createStars();
     </script>
+    
+    <!-- Include footer -->
+<script>
+    fetch('../../footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+            
+            initBackgroundToggle();
+        });
+</script>
 </body>
-</html> 
+</html>
