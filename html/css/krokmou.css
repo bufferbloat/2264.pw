@@ -9,6 +9,10 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .title {
