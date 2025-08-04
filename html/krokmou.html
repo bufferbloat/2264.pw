@@ -10,7 +10,11 @@
 <body>
  
     
-    <h1 class="title">To my little buddy <span class="krokmou-name">Krokmou</span></h1>
+    <h1 class="title">For my little buddy <span class="krokmou-name">Krokmou</span></h1>
+    
+    <div class="krokmou-image">
+        <img src="assets/img/krok.png" alt="Krokmou" />
+    </div>
     
     <div class="counter-section">
         <div id="lifespan">Calculating...</div>
@@ -117,20 +121,20 @@
                 '<span class="krokmou-name">Krokmou</span> lived to be 2 years, 1 week, 3 days old.';
             document.getElementById('lifespan-days').textContent = 
                 '(741 days)';
-
+        
             // 2nd text
             const wouldBeAge = calculateTimeDifference(birthDate, now);
             document.getElementById('would-be').innerHTML = 
                 `<span class="krokmou-name">Krokmou</span> would be ${formatDuration(wouldBeAge)} old today.`;
             document.getElementById('would-be-days').textContent = 
                 `(${wouldBeAge.totalDays} days)`;
-
+        
             // 3rd text
             const timeSincePassing = calculateTimeDifference(passedDate, now);
             document.getElementById('passed').innerHTML = 
                 `<span class="krokmou-name">Krokmou</span> passed away ${formatTimeSincePassing(timeSincePassing)} ago.`;
             document.getElementById('passed-days').textContent = 
-                `(${timeSincePassing.totalDays} days ago)`;
+                `(${timeSincePassing.totalDays} day${timeSincePassing.totalDays === 1 ? '' : 's'} ago)`;
         }
 
         updateCounters();

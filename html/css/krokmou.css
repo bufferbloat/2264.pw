@@ -17,6 +17,10 @@ body {
     text-align: center;
 }
 
+.counter-section:first-of-type {
+    margin-top: 70px;
+}
+
 .counter-section {
     margin-top: 20px;
     font-size: 24px;
@@ -64,4 +68,14 @@ body {
     100% {
         opacity: 0.5;
     }
+}
+
+.krokmou-image {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.krokmou-image img {
+    max-width: 500px;
+    border-radius: 10px;
 }
