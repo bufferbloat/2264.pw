@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
+    <title>Krokmou</title>
+    <link rel="stylesheet" href="css/krokmou.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+ 
+    
+    <h1 class="title">To my little buddy <span class="krokmou-name">Krokmou</span></h1>
+    
+    <div class="counter-section">
+        <div id="lifespan">Calculating...</div>
+        <div id="lifespan-days" class="days"></div>
+    </div>
+
+    <div class="counter-section">
+        <div id="would-be">Calculating...</div>
+        <div id="would-be-days" class="days"></div>
+    </div>
+
+    <div class="counter-section">
+        <div id="passed">Calculating...</div>
+        <div id="passed-days" class="days"></div>
+    </div>
+
+    <div class="stars"></div>
+
+    <script>
+        function getParisTime() {
+            return new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Paris"}));
+        }
+
+        function calculateTimeDifference(startDate, endDate) {
+            const start = new Date(startDate);
+            start.setHours(0, 0, 0, 0);
+            
+            const end = new Date(endDate);
+            end.setHours(0, 0, 0, 0);
+            
+            const totalDays = Math.floor((end - start) / (24 * 60 * 60 * 1000));
+            
+            // Calculate years
+            const years = Math.floor(totalDays / 365);
+            let remainingDays = totalDays % 365;
+            
+            // Calculate weeks and days
+            const weeks = Math.floor(remainingDays / 7);
+            const days = remainingDays % 7;
+            
+            // Only add the extra day for the would-be age counter
+            const isWouldBeAgeCalculation = startDate.toString() === new Date('2023-07-25').toString();
+            
+            return { 
+                years, 
+                weeks, 
+                days, 
+                totalDays: isWouldBeAgeCalculation ? totalDays + 1 : totalDays 
+            };
+        }
+
+        function formatDuration(duration) {
+            let text = '';
+            
+            if (duration.years > 0) {
+                text += `${duration.years} year${duration.years > 1 ? 's' : ''}`;
+            }
+            
+            if (duration.weeks > 0) {
+                text += `${text ? ', ' : ''}${duration.weeks} week${duration.weeks > 1 ? 's' : ''}`;
+            }
+            
+            if (duration.days > 0) {
+                text += `${text ? ', ' : ''}${duration.days} day${duration.days > 1 ? 's' : ''}`;
+            }
+            
+            return text || '0 days';
+        }
+
+        function formatTimeSincePassing(duration) {
+            let text = '';
+            let totalDays = duration.totalDays;
+            
+            // years
+            const years = Math.floor(totalDays / 365);
+            totalDays = totalDays % 365;
+            
+            // weeks and days
+            const weeks = Math.floor(totalDays / 7);
+            const days = totalDays % 7;
+            
+            if (years > 0) {
+                text += `${years} year${years > 1 ? 's' : ''}`;
+            }
+            
+            if (weeks > 0) {
+                text += `${text ? ', ' : ''}${weeks} week${weeks > 1 ? 's' : ''}`;
+            }
+            
+            if (days > 0) {
+                text += `${text ? ', ' : ''}${days} day${days > 1 ? 's' : ''}`;
+            }
+            
+            return text || '0 days';
+        }
+
+        function updateCounters() {
+            const now = getParisTime();
+            const birthDate = new Date('2023-07-25');
+            const passedDate = new Date('2025-08-03');
+            
+            // 1st text static
+            document.getElementById('lifespan').innerHTML = 
+                '<span class="krokmou-name">Krokmou</span> lived to be 2 years, 1 week, 3 days old.';
+            document.getElementById('lifespan-days').textContent = 
+                '(741 days)';
+
+            // 2nd text
+            const wouldBeAge = calculateTimeDifference(birthDate, now);
+            document.getElementById('would-be').innerHTML = 
+                `<span class="krokmou-name">Krokmou</span> would be ${formatDuration(wouldBeAge)} old today.`;
+            document.getElementById('would-be-days').textContent = 
+                `(${wouldBeAge.totalDays} days)`;
+
+            // 3rd text
+            const timeSincePassing = calculateTimeDifference(passedDate, now);
+            document.getElementById('passed').innerHTML = 
+                `<span class="krokmou-name">Krokmou</span> passed away ${formatTimeSincePassing(timeSincePassing)} ago.`;
+            document.getElementById('passed-days').textContent = 
+                `(${timeSincePassing.totalDays} days ago)`;
+        }
+
+        updateCounters();
+        setInterval(updateCounters, 1000);
+
+        // stars
+        function createStars() {
+            const stars = document.querySelector('.stars');
+            const count = 200;
+
+            stars.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                createStar(stars);
+            }
+        }
+
+        window.addEventListener('resize', createStars);
+
+        function createStar(container) {
+            const element = document.createElement('div');
+            element.classList.add('star');
+            resetElement(element);
+            container.appendChild(element);
+            animateStar(element);
+        }
+
+        function resetElement(element) {
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+        }
+
+        function animateStar(star) {
+            star.animate([
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ], {
+                duration: Math.random() * 3000 + 3000,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            star.animate([
+                { opacity: Math.random() * 0.5 + 0.1 },
+                { opacity: Math.random() * 0.3 + 0.7 },
+                { opacity: Math.random() * 0.5 + 0.1 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+        }
+
+        // initialize stars
+        createStars();
+    </script>
+</body>
+</html>
