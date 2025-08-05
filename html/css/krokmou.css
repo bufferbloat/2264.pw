@@ -83,3 +83,33 @@ body {
     max-width: 500px;
     border-radius: 10px;
 }
+
+.oneko-treat {
+    width: 16px;
+    height: 16px;
+    position: fixed;
+    pointer-events: none;
+    image-rendering: pixelated;
+    background-size: cover;
+    transform: translate(-50%, -50%);
+}
+
+.neko-size-input {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    color: white;
+    padding: 5px;
+    width: 50px;
+    font-family: Arial;
+    font-size: 14px;
+    z-index: 2147483646;
+}
+
+.neko-size-input::-webkit-inner-spin-button,
+.neko-size-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -9,11 +9,11 @@
 
   const nekoEl = document.createElement("div");
 
-  let nekoPosX = 32;
-  let nekoPosY = 32;
+  let nekoPosX = 70; 
+  let nekoPosY = 100;
 
-  let mousePosX = 0;
-  let mousePosY = 0;
+  let mousePosX = 70; 
+  let mousePosY = 100;
 
   let frameCount = 0;
   let idleTime = 0;
@@ -84,6 +84,16 @@
     ],
   };
 
+  function resize(num) {
+    const scaleFactor = 0.2;
+    const scale = num * scaleFactor - scaleFactor + 1;
+
+    nekoEl.style.transform = `scale(${scale})`;
+    treats.forEach(treat => {
+      treat.style.transform = `scale(${scale})`;
+    });
+  }
+
   function init() {
     nekoEl.id = "oneko";
     nekoEl.ariaHidden = true;
@@ -105,10 +115,53 @@
 
     document.body.appendChild(nekoEl);
 
-    document.addEventListener("mousemove", function (event) {
-      mousePosX = event.clientX;
-      mousePosY = event.clientY;
+    // Create size input container
+    const sizeContainer = document.createElement("div");
+    sizeContainer.style.position = "absolute"; // Changed from fixed to absolute
+    sizeContainer.style.top = "10px";
+    sizeContainer.style.left = "10px";
+    sizeContainer.style.zIndex = 2147483646;
+    sizeContainer.style.background = "rgba(0, 0, 0, 0.7)";
+    sizeContainer.style.padding = "5px 10px";
+    sizeContainer.style.borderRadius = "5px";
+    sizeContainer.style.display = "flex";
+    sizeContainer.style.alignItems = "center";
+    sizeContainer.style.gap = "10px";
+
+    // Create label
+    const label = document.createElement("span");
+    label.textContent = "Krokmou Scale";
+    label.style.color = "#fff";
+    label.style.fontFamily = "monospace";
+    label.style.fontSize = "14px";
+
+    // Create size input
+    const sizeInput = document.createElement("input");
+    sizeInput.type = "number";
+    sizeInput.min = "1";
+    sizeInput.max = "10";
+    sizeInput.value = "1";
+    sizeInput.style.width = "50px";
+    sizeInput.style.background = "transparent";
+    sizeInput.style.border = "none";
+    sizeInput.style.color = "#fff";
+    sizeInput.style.fontFamily = "monospace";
+    sizeInput.style.fontSize = "14px";
+    sizeInput.addEventListener("input", (e) => {
+        resize(Number(e.target.value));
     });
+
+    sizeContainer.appendChild(label);
+    sizeContainer.appendChild(sizeInput);
+    document.body.appendChild(sizeContainer);
+
+    document.addEventListener("mousemove", function (event) {
+        mousePosX = event.clientX;
+        mousePosY = event.clientY;
+    });
+
+    // treats functionality
+    initTreats();
 
     window.requestAnimationFrame(onAnimationFrame);
   }
@@ -116,7 +169,7 @@
   let lastFrameTimestamp;
 
   function onAnimationFrame(timestamp) {
-    // Stops execution if the neko element is removed from DOM
+    
     if (!nekoEl.isConnected) {
       return;
     }
@@ -143,10 +196,10 @@
   function idle() {
     idleTime += 1;
 
-    // every ~ 20 seconds
+    
     if (
       idleTime > 10 &&
-      Math.floor(Math.random() * 50) == 0 && // Changed from 200 to 50
+      Math.floor(Math.random() * 50) == 0 && 
       idleAnimation == null
     ) {
       let avalibleIdleAnimations = ["sleeping", "scratchSelf"];
@@ -198,11 +251,31 @@
 
   function frame() {
     frameCount += 1;
-    const diffX = nekoPosX - mousePosX;
-    const diffY = nekoPosY - mousePosY;
+    let toTreat = false;
+    let posX;
+    let posY;
+
+
+    if (treats.length > 0) {
+      toTreat = true;
+      const treat = treats[0];
+      posX = parseInt(treat.style.left);
+      posY = parseInt(treat.style.top);
+    } else {
+      posX = mousePosX;
+      posY = mousePosY;
+    }
+
+    const diffX = nekoPosX - posX;
+    const diffY = nekoPosY - posY;
     const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
-    if (distance < nekoSpeed || distance < 48) {
+    if (distance < nekoSpeed || (toTreat ? distance < 12 : distance < 48)) {
+      if (treats.length > 0) {
+        const treat = treats[0];
+        treat.remove();
+        treats.splice(0, 1);
+      }
       idle();
       return;
     }
@@ -212,7 +285,7 @@
 
     if (idleTime > 1) {
       setSprite("alert", 0);
-      // count down after being alerted before moving
+    
       idleTime = Math.min(idleTime, 7);
       idleTime -= 1;
       return;
@@ -235,5 +308,68 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
   }
 
+  // Treat implementation inspired by flleeppyy (https://github.com/flleeppyy)
+  let treats = []; 
+  let treatsEnabled = false; // disable treats by default
+
+  function initTreats() {
+    
+    const toggleContainer = document.createElement("div");
+    toggleContainer.style.position = "absolute"; 
+    toggleContainer.style.top = "45px"; 
+    toggleContainer.style.left = "10px"; 
+    toggleContainer.style.zIndex = 2147483646;
+    toggleContainer.style.background = "rgba(0, 0, 0, 0.7)";
+    toggleContainer.style.padding = "5px 10px";
+    toggleContainer.style.borderRadius = "5px";
+    toggleContainer.style.display = "flex";
+    toggleContainer.style.alignItems = "center";
+    toggleContainer.style.gap = "10px";
+
+    
+    const label = document.createElement("label");
+    label.textContent = "Enable Treats";
+    label.style.color = "#fff";
+    label.style.fontFamily = "monospace";
+    label.style.fontSize = "14px";
+
+    
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = treatsEnabled;
+    checkbox.style.cursor = "pointer";
+
+    checkbox.addEventListener("change", () => {
+      treatsEnabled = checkbox.checked;
+    });
+
+    toggleContainer.appendChild(label);
+    toggleContainer.appendChild(checkbox);
+    document.body.appendChild(toggleContainer);
+
+    // click event listener treats
+    document.addEventListener('click', (event) => {
+      if (treatsEnabled) {
+        placeTreat(event.clientX, event.clientY);
+      }
+    });
+  
+    // T key binding as alternative
+    document.addEventListener("keyup", event => {
+      if (event.key === "t" && treatsEnabled) {
+        placeTreat(mousePosX, mousePosY);
+      }
+    });
+  }
+  
+  function placeTreat(x, y) {
+    const treat = document.createElement("div");
+    treat.className = "oneko-treat";
+    treat.style.left = `${x}px`;
+    treat.style.top = `${y}px`;
+    treat.style.backgroundImage = `url(./assets/img/treat.png)`;
+    document.body.appendChild(treat);
+    treats.push(treat);
+  }
   init();
 })();
