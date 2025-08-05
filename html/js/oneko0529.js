@@ -84,6 +84,10 @@
     ],
   };
 
+
+  let treats = []; 
+  let treatsEnabled = false;
+
   function resize(num) {
     const scaleFactor = 0.2;
     const scale = num * scaleFactor - scaleFactor + 1;
@@ -115,9 +119,9 @@
 
     document.body.appendChild(nekoEl);
 
-    // Create size input container
+    
     const sizeContainer = document.createElement("div");
-    sizeContainer.style.position = "absolute"; // Changed from fixed to absolute
+    sizeContainer.style.position = "absolute";
     sizeContainer.style.top = "10px";
     sizeContainer.style.left = "10px";
     sizeContainer.style.zIndex = 2147483646;
@@ -309,11 +313,7 @@
   }
 
   // Treat implementation inspired by flleeppyy (https://github.com/flleeppyy)
-  let treats = []; 
-  let treatsEnabled = false; // disable treats by default
-
   function initTreats() {
-    
     const toggleContainer = document.createElement("div");
     toggleContainer.style.position = "absolute"; 
     toggleContainer.style.top = "45px"; 
@@ -326,14 +326,12 @@
     toggleContainer.style.alignItems = "center";
     toggleContainer.style.gap = "10px";
 
-    
     const label = document.createElement("label");
     label.textContent = "Enable Treats";
     label.style.color = "#fff";
     label.style.fontFamily = "monospace";
     label.style.fontSize = "14px";
 
-    
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = treatsEnabled;

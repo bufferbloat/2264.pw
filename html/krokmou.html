@@ -47,15 +47,15 @@
             
             const totalDays = Math.floor((end - start) / (24 * 60 * 60 * 1000));
             
-            // Calculate years
+
             const years = Math.floor(totalDays / 365);
             let remainingDays = totalDays % 365;
             
-            // Calculate weeks and days
+
             const weeks = Math.floor(remainingDays / 7);
             const days = remainingDays % 7;
             
-            // Only add the extra day for the would-be age counter
+
             const isWouldBeAgeCalculation = startDate.toString() === new Date('2023-07-25').toString();
             
             return { 
@@ -192,6 +192,6 @@
         // initialize stars
         createStars();
     </script>
-    <script src="js\oneko.js"></script>
+    <script src="js/oneko0529.js"></script>
 </body>
 </html>
