@@ -10,11 +10,9 @@
   const nekoEl = document.createElement("div");
 
   let nekoPosX = 70; 
-  let nekoPosY = 100;
-
-  let mousePosX = 70; 
-  let mousePosY = 100;
-
+  let nekoPosY = 70;  
+  let mousePosX = 70;
+  let mousePosY = 70;
   let frameCount = 0;
   let idleTime = 0;
   let idleAnimation = null;
@@ -118,46 +116,6 @@
     nekoEl.style.backgroundImage = `url(${nekoFile})`;
 
     document.body.appendChild(nekoEl);
-
-    
-    const sizeContainer = document.createElement("div");
-    sizeContainer.style.position = "absolute";
-    sizeContainer.style.top = "10px";
-    sizeContainer.style.left = "10px";
-    sizeContainer.style.zIndex = 2147483646;
-    sizeContainer.style.background = "rgba(0, 0, 0, 0.7)";
-    sizeContainer.style.padding = "5px 10px";
-    sizeContainer.style.borderRadius = "5px";
-    sizeContainer.style.display = "flex";
-    sizeContainer.style.alignItems = "center";
-    sizeContainer.style.gap = "10px";
-
-    // Create label
-    const label = document.createElement("span");
-    label.textContent = "Krokmou Scale";
-    label.style.color = "#fff";
-    label.style.fontFamily = "monospace";
-    label.style.fontSize = "14px";
-
-    // Create size input
-    const sizeInput = document.createElement("input");
-    sizeInput.type = "number";
-    sizeInput.min = "1";
-    sizeInput.max = "10";
-    sizeInput.value = "1";
-    sizeInput.style.width = "50px";
-    sizeInput.style.background = "transparent";
-    sizeInput.style.border = "none";
-    sizeInput.style.color = "#fff";
-    sizeInput.style.fontFamily = "monospace";
-    sizeInput.style.fontSize = "14px";
-    sizeInput.addEventListener("input", (e) => {
-        resize(Number(e.target.value));
-    });
-
-    sizeContainer.appendChild(label);
-    sizeContainer.appendChild(sizeInput);
-    document.body.appendChild(sizeContainer);
 
     document.addEventListener("mousemove", function (event) {
         mousePosX = event.clientX;
@@ -314,11 +272,11 @@
 
   // Treat implementation inspired by flleeppyy (https://github.com/flleeppyy)
   function initTreats() {
-    const toggleContainer = document.createElement("div");
-    toggleContainer.style.position = "absolute"; 
-    toggleContainer.style.top = "45px"; 
-    toggleContainer.style.left = "10px"; 
-    toggleContainer.style.zIndex = 2147483646;
+    const toggleContainer = document.createElement('div');
+    toggleContainer.style.position = 'fixed';
+    toggleContainer.style.top = '5px';  
+    toggleContainer.style.left = '5px';
+    toggleContainer.style.zIndex = '2147483646';
     toggleContainer.style.background = "rgba(0, 0, 0, 0.7)";
     toggleContainer.style.padding = "5px 10px";
     toggleContainer.style.borderRadius = "5px";
