@@ -1,142 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
-    <title>blog</title>
-    <link rel="stylesheet" href="css/blog.css">
-</head>
-<body>
-    <div class="stars"></div>
-    <div class="top-buttons">
-        <a href="https://2264.pw" class="top-button">home</a>
-        <a href="https://2264.pw/blog" class="top-button">blog</a>
-        <a href="https://2264.pw/files" class="top-button">files</a>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>blog</title>
+        <link rel="stylesheet" href="css/blog.css" />
+    </head>
+    <body>
+        <div class="stars"></div>
+        <div class="top-buttons">
+            <a href="https://2264.pw" class="top-button">home</a>
+            <a href="https://2264.pw/blog" class="top-button">blog</a>
+            <a href="https://2264.pw/files" class="top-button">files</a>
+        </div>
 
-    <div class="main-container">
-        <a href="/blog/first-post.html" class="blog-post">
-            <div class="post-header">
-                <div class="post-title-group">
-                    <div class="post-title">Nothing ever happens</div>
-                    <div class="new-label">New</div>
+        <div class="main-container">
+            <a href="/blog/26-09-25" class="blog-post">
+                <div class="post-header">
+                    <div class="post-title-group">
+                        <div class="post-title">Hi if you even care</div>
+                        <div class="new-label">New</div>
+                    </div>
+                    <div class="post-date">26.09.2025</div>
                 </div>
-                <div class="post-date">02.08.2025</div>
-            </div>
-            <div class="post-preview">
-                coolest thing ever (still building the blog section)
-            </div>
-        </a>
-    </div>
+                <div class="post-preview">
+                    Hey welcome to the most boring part of my website… or maybe
+                    not. I've been putting this off for a while but I've got a
+                    lot to say and this felt like the right moment to start ...
+                </div>
+            </a>
+        </div>
 
-    <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.body.insertAdjacentHTML('beforeend', data);
-                initBackgroundToggle();
-            });
-    </script>
+        <script>
+            fetch("footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.body.insertAdjacentHTML("beforeend", data);
+                    initBackgroundToggle();
+                });
+        </script>
 
-    <script>
-        function initBackgroundToggle() {
-            const bgToggle = document.getElementById('bgToggle');
-            let isNebula = false;
+        <script>
+            function initBackgroundToggle() {
+                const bgToggle = document.getElementById("bgToggle");
+                let isNebula = false;
 
-            document.body.style.backgroundColor = '#000';
-            document.body.style.backgroundImage = 'none';
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-            document.body.style.backgroundRepeat = 'no-repeat';
-            document.body.style.backgroundAttachment = 'fixed';
+                document.body.style.backgroundColor = "#000";
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat";
+                document.body.style.backgroundAttachment = "fixed";
 
-            function toggleBackground() {
-                isNebula = !isNebula;
-                if (isNebula) {
-                    document.body.style.backgroundImage = 'url("assets/img/2264.png")';
-                } else {
-                    document.body.style.backgroundImage = 'none';
+                function toggleBackground() {
+                    isNebula = !isNebula;
+                    if (isNebula) {
+                        document.body.style.backgroundImage =
+                            'url("assets/img/2264.png")';
+                    } else {
+                        document.body.style.backgroundImage = "none";
+                    }
+                }
+
+                bgToggle.addEventListener("click", toggleBackground);
+
+                document.body.addEventListener("dblclick", function (e) {
+                    if (e.target === document.body) {
+                        toggleBackground();
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            // stars init
+            createStars();
+            checkElementPositions();
+
+            function createStars() {
+                const stars = document.querySelector(".stars");
+                const count = 200;
+
+                stars.innerHTML = "";
+                for (let i = 0; i < count; i++) {
+                    createStar(stars);
                 }
             }
 
-            bgToggle.addEventListener('click', toggleBackground);
+            window.addEventListener("resize", createStars);
 
-            document.body.addEventListener('dblclick', function(e) {
-                if (e.target === document.body) {
-                    toggleBackground();
-                }
-            });
-        }
-    </script>
-
-    <script>
-        // stars init
-        createStars();
-        checkElementPositions();
-
-        function createStars() {
-            const stars = document.querySelector('.stars');
-            const count = 200;
-
-            stars.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                createStar(stars);
+            function createStar(container) {
+                const element = document.createElement("div");
+                element.classList.add("star");
+                resetElement(element);
+                container.appendChild(element);
+                animateStar(element);
             }
-        }
 
-        window.addEventListener('resize', createStars);
+            function resetElement(element) {
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+            }
 
-        function createStar(container) {
-            const element = document.createElement('div');
-            element.classList.add('star');
-            resetElement(element);
-            container.appendChild(element);
-            animateStar(element);
-        }
+            function animateStar(star) {
+                star.animate(
+                    [
+                        { transform: "translate(0, 0)" },
+                        {
+                            transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`,
+                        },
+                    ],
+                    {
+                        duration: Math.random() * 3000 + 3000,
+                        iterations: Infinity,
+                        direction: "alternate",
+                        easing: "ease-in-out",
+                    },
+                );
 
-        function resetElement(element) {
-            element.style.left = `${Math.random() * 100}%`;
-            element.style.top = `${Math.random() * 100}%`;
-        }
+                star.animate(
+                    [
+                        { opacity: Math.random() * 0.5 + 0.1 },
+                        { opacity: Math.random() * 0.3 + 0.7 },
+                        { opacity: Math.random() * 0.5 + 0.1 },
+                    ],
+                    {
+                        duration: Math.random() * 3000 + 2000,
+                        iterations: Infinity,
+                        direction: "alternate",
+                        easing: "ease-in-out",
+                    },
+                );
+            }
 
-        function animateStar(star) {
-            star.animate([
-                { transform: 'translate(0, 0)' },
-                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
-            ], {
-                duration: Math.random() * 3000 + 3000,
-                iterations: Infinity,
-                direction: 'alternate',
-                easing: 'ease-in-out'
-            });
+            function checkElementPositions() {
+                const elements = document.querySelectorAll(".star");
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
 
-            star.animate([
-                { opacity: Math.random() * 0.5 + 0.1 },
-                { opacity: Math.random() * 0.3 + 0.7 },
-                { opacity: Math.random() * 0.5 + 0.1 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                iterations: Infinity,
-                direction: 'alternate',
-                easing: 'ease-in-out'
-            });
-        }
+                elements.forEach((element) => {
+                    const rect = element.getBoundingClientRect();
+                    if (
+                        rect.bottom < 0 ||
+                        rect.top > viewportHeight ||
+                        rect.right < 0 ||
+                        rect.left > viewportWidth
+                    ) {
+                        resetElement(element);
+                        animateStar(element);
+                    }
+                });
 
-        function checkElementPositions() {
-            const elements = document.querySelectorAll('.star');
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
-                    resetElement(element);
-                    animateStar(element);
-                }
-            });
-
-            requestAnimationFrame(checkElementPositions);
-        }
-    </script>
-</body>
-</html> 
+                requestAnimationFrame(checkElementPositions);
+            }
+        </script>
+    </body>
+</html>
