@@ -132,3 +132,48 @@ body {
     justify-content: center;
     border-radius: 10px;
 }
+
+
+.krokmou-gallery {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto 120px auto;
+}
+
+.krokmou-photo {
+    display: flex;
+    margin: -15px 0;
+}
+
+.krokmou-photo img {
+    width: min(480px, 85vw);
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+
+.krokmou-photo:nth-child(odd) {
+    justify-content: flex-start;
+}
+
+.krokmou-photo:nth-child(even) {
+    justify-content: flex-end;
+}
+
+/* captions under images */
+.krokmou-photo { 
+    flex-direction: column; 
+}
+
+.krokmou-photo:nth-child(odd) { align-items: flex-start; }
+.krokmou-photo:nth-child(even) { align-items: flex-end; }
+
+.krokmou-caption {
+    max-width: min(480px, 85vw);
+    margin-top: 6px;
+    color: #cfcfcf;
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0.95;
+}
