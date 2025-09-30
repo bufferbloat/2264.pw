@@ -30,7 +30,7 @@ const getTrack = async () => {
         let isPlaying = json.track['@attr']?.nowplaying || false;
         
         updateWidgetContent(`
-        <p class="now-playing-text">${isPlaying ? 'now listening' : 'last listened'}</p>
+        <p class="now-playing-text"><span class="status-dot ${isPlaying ? 'status-dot--green' : 'status-dot--red'}"></span>${isPlaying ? 'now listening' : 'last listened'}</p>
         <div class="content-wrapper">
             <img src="${json.track.image[1]['#text']}" alt="Album cover">
             <div id="trackInfo">

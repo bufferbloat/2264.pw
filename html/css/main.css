@@ -150,28 +150,6 @@ a:hover {
     position: relative;
 }
 
-.widgets-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-}
-
-/* main widget style */
-.widget-box {
-    width: 250px;
-    height: 200px;
-    border: 1px solid #333;
-    background-color: #000000b3;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* individual widget styles */
-.widget-lastfm {
-    height: 150px;
-}
-
 .widget-status {
     height: 120px;
 }
