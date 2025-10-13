@@ -1,0 +1,23 @@
+#webamp-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 450px;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+#webamp-container > * {
+    pointer-events: all;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media screen and (max-width: 1024px) {
+    .desktop-only {
+        display: none !important;
+    }
+}

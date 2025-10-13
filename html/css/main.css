@@ -18,6 +18,10 @@ body {
     opacity: 0;
     animation: fadeInPage 1.5s ease-out forwards;
     transition: all 0.5s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 @keyframes fadeInPage {
@@ -115,7 +119,6 @@ a:hover {
     color: rgba(255, 255, 255, 0.5);
     font-size: 14px;
 }
-
 
 @keyframes deleteChar {
     from {
@@ -285,7 +288,7 @@ a:hover {
 }
 
 .bg-nebula {
-    background-image: url('../assets/img/2264.png');
+    background-image: url("../assets/img/2264.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -308,4 +311,15 @@ a:hover {
 
 .bg-toggle:hover {
     opacity: 1;
-} 
+}
+/*
+a,
+.project-link,
+#statuscafe-content,
+#listening {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+*/

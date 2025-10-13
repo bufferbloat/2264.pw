@@ -6,29 +6,29 @@
     <title>home</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/webamp.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    
+
     <link rel="preload" href="assets/img/2264.png" as="image">
-    
+
     <div class="stars"></div>
     <div class="top-buttons">
         <a href="https://2264.pw" class="top-button">home</a>
         <a href="https://2264.pw/blog" class="top-button">blog</a>
         <a href="https://2264.pw/files" class="top-button">files</a>
     </div>
-    
+
     <div class="content">
         <div class="main-container">
             <div class="section">
                 <h1 class="section-title">hi, i'm Way</h1>
                 <div class="section-content">
-                    developer based in France, 
+                    developer based in France,
                     mostly interested in low-level programming, embedded systems and operating systems.<br>
                     <br>
-                    feel free to dm me on <a href="https://twitter.com/bufferbloat" class="project-link" target="_blank">twitter</a> 
-                    or <a href="mailto:way@2264.pw" class="project-link" target="_blank">way@2264.pw</a>
+                    feel free to email me at <a href="mailto:way@2264.pw" class="project-link" target="_blank">way@2264.pw</a>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
                     </div>
                     <div class="skill-category">
                         <h3>frameworks & tools</h3>
-                        <ul>                     
+                        <ul>
                             <li>React</li>
                             <li>NextJS</li>
                             <li>NodeJS</li>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="widgets-container">
             <div class="widget-box widget-lastfm">
                 <div id="listening"></div>
@@ -94,13 +94,15 @@
         </div>
     </div>
 
-    <!-- Include footer -->
+    <!-- Webamp overlay -->
+    <div id="webamp-container" class="desktop-only"></div>
+
     <script>
         fetch('footer.html')
             .then(response => response.text())
             .then(data => {
                 document.body.insertAdjacentHTML('beforeend', data);
-                
+
                 initBackgroundToggle();
             });
     </script>
@@ -110,7 +112,7 @@
             const bgToggle = document.getElementById('bgToggle');
             let isNebula = false;
 
-            
+
             document.body.style.backgroundColor = '#000';
             document.body.style.backgroundImage = 'none';
             document.body.style.backgroundSize = 'cover';
@@ -127,10 +129,10 @@
                 }
             }
 
-            
+
             bgToggle.addEventListener('click', toggleBackground);
 
-            
+
             document.body.addEventListener('dblclick', function(e) {
                 if (e.target === document.body) {
                     toggleBackground();
@@ -210,6 +212,8 @@
             requestAnimationFrame(checkElementPositions);
         }
     </script>
+
+    <!-- Webamp -->
+    <script type="module" src="js/webamp3.js"></script>
 </body>
 </html>
-
