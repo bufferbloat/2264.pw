@@ -1,221 +1,382 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.55, maximum-scale=1.0, user-scalable=no">
-    <title>Krokmou</title>
-    <link rel="stylesheet" href="css/krokmou.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-</head>
-<body>
- 
-    
-    <h1 class="title">For my little buddy <span class="krokmou-name">Krokmou</span></h1>
-    
-    <div class="krokmou-image">
-        <img src="assets/img/krok.png?v=1" alt="Krokmou" />
-    </div>
-    
-    <div class="counter-section">
-        <div id="lifespan">Calculating...</div>
-        <div id="lifespan-days" class="days"></div>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=0.55, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Krokmou</title>
+        <link rel="stylesheet" href="css/krokmou.css" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        <h1 class="title">
+            For my little buddy <span class="krokmou-name">Krokmou</span>
+        </h1>
 
-    <div class="counter-section">
-        <div id="would-be">Calculating...</div>
-        <div id="would-be-days" class="days"></div>
-    </div>
-
-    <div class="counter-section">
-        <div id="passed">Calculating...</div>
-        <div id="passed-days" class="days"></div>
-    </div>
-
-    <div class="text-area">
-        <div class="text-content">
-
+        <div class="krokmou-image">
+            <img src="assets/img/krok.png?v=1" alt="Krokmou" />
         </div>
-    </div>
 
-    <div class="krokmou-gallery">
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_0024.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> snow</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_0320.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> *drool* pizza</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_0427.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> nappies</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_1485.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> lunch time with yoda</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_1867.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> stare</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2086.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> blep</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2468.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> :3</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2619.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> blep 2</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2816.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> tired</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2847.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> give food now</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_2984.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> weird position</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_3126.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> unbothered</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_3267.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> weird position 2</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_3318.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> chilling</div></div>
-        <div class="krokmou-photo"><img src="assets/img/krokmou/IMG_8589.JPG" alt="Krokmou" loading="lazy"><div class="krokmou-caption">> O_O</div></div>
-    </div>
+        <div class="counter-section">
+            <div id="lifespan">Calculating...</div>
+            <div id="lifespan-days" class="days"></div>
+        </div>
 
-    <div class="stars"></div>
+        <div class="counter-section">
+            <div id="would-be">Calculating...</div>
+            <div id="would-be-days" class="days"></div>
+        </div>
 
-    <script>
-        function getParisTime() {
-            return new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Paris"}));
-        }
+        <div class="counter-section">
+            <div id="passed">Calculating...</div>
+            <div id="passed-days" class="days"></div>
+        </div>
 
-        function calculateTimeDifference(startDate, endDate) {
-            const start = new Date(startDate);
-            start.setHours(0, 0, 0, 0);
-            
-            const end = new Date(endDate);
-            end.setHours(0, 0, 0, 0);
-            
-            const totalDays = Math.floor((end - start) / (24 * 60 * 60 * 1000));
-            
+        <div class="text-area">
+            <div class="text-content"></div>
+        </div>
 
-            const years = Math.floor(totalDays / 365);
-            let remainingDays = totalDays % 365;
-            
+        <div class="krokmou-gallery">
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_0024.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> snow</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_0320.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> *drool* pizza</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_0427.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> nappies</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_1485.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> lunch time with yoda</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_1867.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> stare</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2086.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> blep</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2468.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> :3</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2619.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> blep 2</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2816.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> tired</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2847.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> give food now</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_2984.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> weird position</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_3126.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> unbothered</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_3267.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> weird position 2</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_3318.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> chilling</div>
+            </div>
+            <div class="krokmou-photo">
+                <img
+                    src="assets/img/krokmou/IMG_8589.JPG"
+                    alt="Krokmou"
+                    loading="lazy"
+                />
+                <div class="krokmou-caption">> O_O</div>
+            </div>
+        </div>
 
-            const weeks = Math.floor(remainingDays / 7);
-            const days = remainingDays % 7;
-            
+        <div class="stars"></div>
 
-            const isWouldBeAgeCalculation = startDate.toString() === new Date('2023-07-25').toString();
-            
-            return { 
-                years, 
-                weeks, 
-                days, 
-                totalDays: isWouldBeAgeCalculation ? totalDays + 1 : totalDays 
-            };
-        }
-
-        function formatDuration(duration) {
-            let text = '';
-            
-            if (duration.years > 0) {
-                text += `${duration.years} year${duration.years > 1 ? 's' : ''}`;
+        <script>
+            function getParisTime() {
+                return new Date(
+                    new Date().toLocaleString("en-US", {
+                        timeZone: "Europe/Paris",
+                    }),
+                );
             }
-            
-            if (duration.weeks > 0) {
-                text += `${text ? ', ' : ''}${duration.weeks} week${duration.weeks > 1 ? 's' : ''}`;
+
+            function calculateTimeDifference(startDate, endDate) {
+                const start = new Date(startDate);
+                start.setHours(0, 0, 0, 0);
+
+                const end = new Date(endDate);
+                end.setHours(0, 0, 0, 0);
+
+                const totalDays = Math.floor(
+                    (end - start) / (24 * 60 * 60 * 1000),
+                );
+
+                // Calculate years properly using date arithmetic
+                let years = end.getFullYear() - start.getFullYear();
+                let tempDate = new Date(start);
+                tempDate.setFullYear(tempDate.getFullYear() + years);
+                if (tempDate > end) {
+                    years--;
+                    tempDate.setFullYear(tempDate.getFullYear() - 1);
+                }
+
+                // Calculate months after years
+                let months = end.getMonth() - tempDate.getMonth();
+                if (end.getDate() < tempDate.getDate()) {
+                    months--;
+                }
+                if (months < 0) {
+                    months += 12;
+                }
+
+                // Calculate remaining days after years and months
+                let tempDate2 = new Date(tempDate);
+                tempDate2.setMonth(tempDate2.getMonth() + months);
+                if (tempDate2 > end) {
+                    months--;
+                    tempDate2.setMonth(tempDate2.getMonth() - 1);
+                }
+
+                let remainingDays = Math.floor(
+                    (end - tempDate2) / (24 * 60 * 60 * 1000),
+                );
+
+                // If less than a full month remaining, use weeks and days
+                const weeks = Math.floor(remainingDays / 7);
+                const days = remainingDays % 7;
+
+                const isWouldBeAgeCalculation =
+                    startDate.toString() === new Date("2023-07-25").toString();
+
+                return {
+                    years,
+                    months,
+                    weeks,
+                    days,
+                    totalDays: isWouldBeAgeCalculation
+                        ? totalDays + 1
+                        : totalDays,
+                };
             }
-            
-            if (duration.days > 0) {
-                text += `${text ? ', ' : ''}${duration.days} day${duration.days > 1 ? 's' : ''}`;
+
+            function formatDuration(duration) {
+                let parts = [];
+
+                if (duration.years > 0) {
+                    parts.push(
+                        `${duration.years} year${duration.years > 1 ? "s" : ""}`,
+                    );
+                }
+
+                // Use months if we have any, otherwise use weeks for small remainders
+                if (duration.months > 0) {
+                    parts.push(
+                        `${duration.months} month${duration.months > 1 ? "s" : ""}`,
+                    );
+                    // After months, show remaining days (weeks don't make sense here)
+                    const remainingDays = duration.weeks * 7 + duration.days;
+                    if (remainingDays > 0) {
+                        parts.push(
+                            `${remainingDays} day${remainingDays > 1 ? "s" : ""}`,
+                        );
+                    }
+                } else {
+                    // No months, so use weeks and days
+                    if (duration.weeks > 0) {
+                        parts.push(
+                            `${duration.weeks} week${duration.weeks > 1 ? "s" : ""}`,
+                        );
+                    }
+                    if (duration.days > 0) {
+                        parts.push(
+                            `${duration.days} day${duration.days > 1 ? "s" : ""}`,
+                        );
+                    }
+                }
+
+                if (parts.length === 0) {
+                    return "0 days";
+                } else if (parts.length === 1) {
+                    return parts[0];
+                } else {
+                    // Join all but last with ", " then add " and " before last
+                    return (
+                        parts.slice(0, -1).join(", ") +
+                        " and " +
+                        parts[parts.length - 1]
+                    );
+                }
             }
-            
-            return text || '0 days';
-        }
 
-        function formatTimeSincePassing(duration) {
-            let text = '';
-            let totalDays = duration.totalDays;
-            
-            // years
-            const years = Math.floor(totalDays / 365);
-            totalDays = totalDays % 365;
-            
-            // weeks and days
-            const weeks = Math.floor(totalDays / 7);
-            const days = totalDays % 7;
-            
-            if (years > 0) {
-                text += `${years} year${years > 1 ? 's' : ''}`;
+            function formatTimeSincePassing(duration) {
+                // Use the same formatting as formatDuration since we now calculate properly
+                return formatDuration(duration);
             }
-            
-            if (weeks > 0) {
-                text += `${text ? ', ' : ''}${weeks} week${weeks > 1 ? 's' : ''}`;
+
+            function updateCounters() {
+                const now = getParisTime();
+                const birthDate = new Date("2023-07-25");
+                const passedDate = new Date("2025-08-03");
+
+                // 1st text static
+                document.getElementById("lifespan").innerHTML =
+                    '<span class="krokmou-name">Krokmou</span> lived to be 2 years, 1 week, 3 days old.';
+                document.getElementById("lifespan-days").textContent =
+                    "(741 days)";
+
+                // 2nd text
+                const wouldBeAge = calculateTimeDifference(birthDate, now);
+                document.getElementById("would-be").innerHTML =
+                    `<span class="krokmou-name">Krokmou</span> would be ${formatDuration(wouldBeAge)} old today.`;
+                document.getElementById("would-be-days").textContent =
+                    `(${wouldBeAge.totalDays} days)`;
+
+                // 3rd text
+                const timeSincePassing = calculateTimeDifference(
+                    passedDate,
+                    now,
+                );
+                document.getElementById("passed").innerHTML =
+                    `<span class="krokmou-name">Krokmou</span> passed away ${formatTimeSincePassing(timeSincePassing)} ago.`;
+                document.getElementById("passed-days").textContent =
+                    `(${timeSincePassing.totalDays} day${timeSincePassing.totalDays === 1 ? "" : "s"} ago)`;
             }
-            
-            if (days > 0) {
-                text += `${text ? ', ' : ''}${days} day${days > 1 ? 's' : ''}`;
+
+            updateCounters();
+            setInterval(updateCounters, 1000);
+
+            // stars
+            function createStars() {
+                const stars = document.querySelector(".stars");
+                const count = 200;
+
+                stars.innerHTML = "";
+                for (let i = 0; i < count; i++) {
+                    createStar(stars);
+                }
             }
-            
-            return text || '0 days';
-        }
 
-        function updateCounters() {
-            const now = getParisTime();
-            const birthDate = new Date('2023-07-25');
-            const passedDate = new Date('2025-08-03');
-            
-            // 1st text static
-            document.getElementById('lifespan').innerHTML = 
-                '<span class="krokmou-name">Krokmou</span> lived to be 2 years, 1 week, 3 days old.';
-            document.getElementById('lifespan-days').textContent = 
-                '(741 days)';
-        
-            // 2nd text
-            const wouldBeAge = calculateTimeDifference(birthDate, now);
-            document.getElementById('would-be').innerHTML = 
-                `<span class="krokmou-name">Krokmou</span> would be ${formatDuration(wouldBeAge)} old today.`;
-            document.getElementById('would-be-days').textContent = 
-                `(${wouldBeAge.totalDays} days)`;
-        
-            // 3rd text
-            const timeSincePassing = calculateTimeDifference(passedDate, now);
-            document.getElementById('passed').innerHTML = 
-                `<span class="krokmou-name">Krokmou</span> passed away ${formatTimeSincePassing(timeSincePassing)} ago.`;
-            document.getElementById('passed-days').textContent = 
-                `(${timeSincePassing.totalDays} day${timeSincePassing.totalDays === 1 ? '' : 's'} ago)`;
-        }
+            window.addEventListener("resize", createStars);
 
-        updateCounters();
-        setInterval(updateCounters, 1000);
-
-        // stars
-        function createStars() {
-            const stars = document.querySelector('.stars');
-            const count = 200;
-
-            stars.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                createStar(stars);
+            function createStar(container) {
+                const element = document.createElement("div");
+                element.classList.add("star");
+                resetElement(element);
+                container.appendChild(element);
+                animateStar(element);
             }
-        }
 
-        window.addEventListener('resize', createStars);
+            function resetElement(element) {
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+            }
 
-        function createStar(container) {
-            const element = document.createElement('div');
-            element.classList.add('star');
-            resetElement(element);
-            container.appendChild(element);
-            animateStar(element);
-        }
+            function animateStar(star) {
+                star.animate(
+                    [
+                        { transform: "translate(0, 0)" },
+                        {
+                            transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`,
+                        },
+                    ],
+                    {
+                        duration: Math.random() * 3000 + 3000,
+                        iterations: Infinity,
+                        direction: "alternate",
+                        easing: "ease-in-out",
+                    },
+                );
 
-        function resetElement(element) {
-            element.style.left = `${Math.random() * 100}%`;
-            element.style.top = `${Math.random() * 100}%`;
-        }
+                star.animate(
+                    [
+                        { opacity: Math.random() * 0.5 + 0.1 },
+                        { opacity: Math.random() * 0.3 + 0.7 },
+                        { opacity: Math.random() * 0.5 + 0.1 },
+                    ],
+                    {
+                        duration: Math.random() * 3000 + 2000,
+                        iterations: Infinity,
+                        direction: "alternate",
+                        easing: "ease-in-out",
+                    },
+                );
+            }
 
-        function animateStar(star) {
-            star.animate([
-                { transform: 'translate(0, 0)' },
-                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
-            ], {
-                duration: Math.random() * 3000 + 3000,
-                iterations: Infinity,
-                direction: 'alternate',
-                easing: 'ease-in-out'
-            });
-
-            star.animate([
-                { opacity: Math.random() * 0.5 + 0.1 },
-                { opacity: Math.random() * 0.3 + 0.7 },
-                { opacity: Math.random() * 0.5 + 0.1 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                iterations: Infinity,
-                direction: 'alternate',
-                easing: 'ease-in-out'
-            });
-        }
-
-        // initialize stars
-        createStars();
-    </script>
-    <script src="js/oneko0458.js"></script>
-</body>
+            // initialize stars
+            createStars();
+        </script>
+        <script src="js/oneko0458.js"></script>
+    </body>
 </html>
