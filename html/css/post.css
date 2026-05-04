@@ -1,7 +1,6 @@
 .post-page {
     width: 100%;
-    min-height: 100svh;
-    padding: 90px 24px 92px;
+    padding: 32px 24px;
 }
 
 .post-container {
@@ -67,7 +66,7 @@
 
 @media (max-width: 600px) {
     .post-page {
-        padding: 76px 14px 86px;
+        padding: 24px 14px;
     }
 
     .post-card {

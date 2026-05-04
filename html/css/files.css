@@ -1,7 +1,6 @@
 .files-page {
     width: 100%;
-    min-height: 100svh;
-    padding: 90px 24px 92px;
+    padding: 32px 24px;
 }
 
 .files-container {
@@ -17,12 +16,12 @@
     width: 100%;
     min-height: min(620px, calc(100svh - 210px));
     border: 0;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.92);
 }
 
 @media (max-width: 600px) {
     .files-page {
-        padding: 76px 14px 86px;
+        padding: 24px 14px;
     }
 
     .files-container {

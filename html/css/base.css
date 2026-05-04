@@ -22,6 +22,8 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     min-height: 100svh;
     margin: 0;
     background-color: var(--page-bg);
@@ -112,13 +114,13 @@ input:focus-visible {
 }
 
 .site-nav {
-    position: fixed;
-    top: 32px;
-    left: 50%;
-    z-index: 10;
     display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 32px;
+    z-index: 10;
     gap: 20px;
-    transform: translateX(-50%);
+    padding: 0 24px;
 }
 
 .site-nav a,
@@ -136,11 +138,12 @@ input:focus-visible {
 }
 
 .site-footer {
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    padding: 24px 24px 18px;
     z-index: 10;
-    transform: translateX(-50%);
 }
 
 .footer-logo-button {
@@ -166,6 +169,7 @@ input:focus-visible {
 
 .page-layer {
     position: relative;
+    flex: 1 0 auto;
     z-index: 1;
 }
 
@@ -181,8 +185,9 @@ input:focus-visible {
 
 @media (max-width: 600px) {
     .site-nav {
-        top: 22px;
+        margin-top: 22px;
         gap: 16px;
+        padding: 0 14px;
     }
 
     .site-nav a,

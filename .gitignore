@@ -1,4 +1,4 @@
-
+html/TP/
 .DS_Store
 Thumbs.db
 desktop.ini
@@ -46,3 +46,9 @@ config.dev.js
 *.bak
 *.backup
 *.[0-9] 
+
+html/src/Tweaks.zip
+html/src/media/
+html/src/drivers/
+certs/
+.htpasswd
