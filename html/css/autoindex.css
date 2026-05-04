@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 15px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+h1 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+pre {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    font-family: monospace;
+    white-space: pre;
+}
+
+pre br {
+    display: none;
+}
+
+a {
+    display: inline-block;
+    min-width: 300px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+a[href$="/"]::before {
+    margin-right: 8px;
+    content: "[dir]";
+}
+
+a:not([href$="/"])::before {
+    margin-right: 8px;
+    content: "[file]";
+}
+
+a[href="../"]::before {
+    content: "[up]";
+}
+
+pre a {
+    margin-right: 50px;
+}
+
+pre a::after {
+    display: inline-block;
+    width: 600px;
+    content: "";
+}
+
+hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,7 +1,16 @@
-import Webamp from "https://unpkg.com/webamp@^2";
+import Webamp from "https://unpkg.com/webamp@2.2.0";
+
+let webampInstance = null;
+let webampLoading = false;
 
 // AudioContext
 function initializeWebamp() {
+    const container = document.getElementById("webamp-container");
+    if (!container || webampInstance || webampLoading) {
+        return;
+    }
+
+    webampLoading = true;
     const webamp = new Webamp({
         initialSkin: {
             url: "https://cdn.webampskins.org/skins/a848e984701261b56d0e408c6ad70f9d.wsz"
@@ -456,7 +465,9 @@ function initializeWebamp() {
     });
 
     // Render
-    webamp.renderWhenReady(document.getElementById("webamp-container")).then(() => {
+    webamp.renderWhenReady(container).then(() => {
+        webampInstance = webamp;
+        webampLoading = false;
         // AudioActivation
         document.addEventListener('click', function activateAudio() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -467,15 +478,22 @@ function initializeWebamp() {
         }, { once: true });
 
     }).catch((error) => {
+        webampLoading = false;
         console.error("Webamp failed to load:", error);
-        document.getElementById("webamp-container").innerHTML =
-            '<div style="color: white; padding: 20px;">Webamp failed to load. Please refresh the page.</div>';
+        const message = document.createElement("div");
+        message.className = "widget-message";
+        message.textContent = "Webamp failed to load. Please refresh the page.";
+        container.replaceChildren(message);
     });
 }
 
 let typedKeys = '';
 
 document.addEventListener('keydown', function(e) {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) {
+        return;
+    }
+
     typedKeys += e.key.toLowerCase();
 
 
@@ -489,4 +507,3 @@ document.addEventListener('keydown', function(e) {
         typedKeys = ''; 
     }
 });
-

@@ -1,24 +1,25 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no"
-        />
-        <title>blog</title>
-        <link rel="stylesheet" href="css/blog.css?v=20260504" />
-    </head>
-    <body>
-        <div class="stars"></div>
-        <div class="top-buttons">
-            <a href="https://2264.pw" class="top-button">home</a>
-            <a href="https://2264.pw/blog" class="top-button">blog</a>
-            <a href="https://2264.pw/files" class="top-button">files</a>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <script src="js/site.js" defer></script>
+</head>
+<body>
+    <div class="stars"></div>
 
-        <div class="main-container">
-            <div class="year-section">
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="https://2264.pw" class="top-button">home</a>
+        <a href="https://2264.pw/blog" class="top-button">blog</a>
+        <a href="https://2264.pw/files" class="top-button">files</a>
+    </nav>
+
+    <main class="blog-page page-layer">
+        <div class="blog-list">
+            <section class="year-section">
                 <div class="year-separator">
                     <span>2026</span>
                 </div>
@@ -32,9 +33,9 @@
                     </div>
                     <div class="post-date">04.05.2026</div>
                 </a>
-            </div>
+            </section>
 
-            <div class="year-section">
+            <section class="year-section">
                 <div class="year-separator">
                     <span>2025</span>
                 </div>
@@ -48,131 +49,14 @@
                     </div>
                     <div class="post-date">26.09.2025</div>
                 </a>
-            </div>
+            </section>
         </div>
+    </main>
 
-        <script>
-            fetch("footer.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.body.insertAdjacentHTML("beforeend", data);
-                    initBackgroundToggle();
-                });
-        </script>
-
-        <script>
-            function initBackgroundToggle() {
-                const bgToggle = document.getElementById("bgToggle");
-                let isNebula = false;
-
-                document.body.style.backgroundColor = "#000";
-                document.body.style.backgroundImage = "none";
-                document.body.style.backgroundSize = "cover";
-                document.body.style.backgroundPosition = "center";
-                document.body.style.backgroundRepeat = "no-repeat";
-                document.body.style.backgroundAttachment = "fixed";
-
-                function toggleBackground() {
-                    isNebula = !isNebula;
-                    if (isNebula) {
-                        document.body.style.backgroundImage =
-                            'url("assets/img/2264.png")';
-                    } else {
-                        document.body.style.backgroundImage = "none";
-                    }
-                }
-
-                bgToggle.addEventListener("click", toggleBackground);
-
-                document.body.addEventListener("dblclick", function (e) {
-                    if (e.target === document.body) {
-                        toggleBackground();
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            // stars init
-            createStars();
-            checkElementPositions();
-
-            function createStars() {
-                const stars = document.querySelector(".stars");
-                const count = 200;
-
-                stars.innerHTML = "";
-                for (let i = 0; i < count; i++) {
-                    createStar(stars);
-                }
-            }
-
-            window.addEventListener("resize", createStars);
-
-            function createStar(container) {
-                const element = document.createElement("div");
-                element.classList.add("star");
-                resetElement(element);
-                container.appendChild(element);
-                animateStar(element);
-            }
-
-            function resetElement(element) {
-                element.style.left = `${Math.random() * 100}%`;
-                element.style.top = `${Math.random() * 100}%`;
-            }
-
-            function animateStar(star) {
-                star.animate(
-                    [
-                        { transform: "translate(0, 0)" },
-                        {
-                            transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`,
-                        },
-                    ],
-                    {
-                        duration: Math.random() * 3000 + 3000,
-                        iterations: Infinity,
-                        direction: "alternate",
-                        easing: "ease-in-out",
-                    },
-                );
-
-                star.animate(
-                    [
-                        { opacity: Math.random() * 0.5 + 0.1 },
-                        { opacity: Math.random() * 0.3 + 0.7 },
-                        { opacity: Math.random() * 0.5 + 0.1 },
-                    ],
-                    {
-                        duration: Math.random() * 3000 + 2000,
-                        iterations: Infinity,
-                        direction: "alternate",
-                        easing: "ease-in-out",
-                    },
-                );
-            }
-
-            function checkElementPositions() {
-                const elements = document.querySelectorAll(".star");
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-
-                elements.forEach((element) => {
-                    const rect = element.getBoundingClientRect();
-                    if (
-                        rect.bottom < 0 ||
-                        rect.top > viewportHeight ||
-                        rect.right < 0 ||
-                        rect.left > viewportWidth
-                    ) {
-                        resetElement(element);
-                        animateStar(element);
-                    }
-                });
-
-                requestAnimationFrame(checkElementPositions);
-            }
-        </script>
-    </body>
+    <footer class="site-footer">
+        <button id="bgToggle" class="footer-logo-button" type="button" aria-label="Toggle nebula background">
+            <img src="assets/img/logo.png" alt="" width="150" height="50">
+        </button>
+    </footer>
+</body>
 </html>

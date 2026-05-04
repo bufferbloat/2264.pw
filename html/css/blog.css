@@ -1,133 +1,40 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: monospace;
-    min-height: 100vh;
+.blog-page {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
-    opacity: 0;
-    animation: fadeInPage 1.5s ease-out forwards;
-}
-
-@keyframes fadeInPage {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.stars {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
+    min-height: 100svh;
+    padding: 90px 24px 92px;
 }
 
-.star {
-    position: absolute;
-    background-color: #fff;
-    width: 1px;
-    height: 1px;
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: twinkle 3s infinite ease-in-out;
-}
-
-@keyframes twinkle {
-    0% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0.5;
-    }
-}
-
-.top-buttons {
-    position: fixed;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+.blog-list {
     display: flex;
-    gap: 20px;
-    z-index: 1000;
-}
-
-.top-button {
-    color: #fff;
-    font-family: monospace;
-    font-size: 16px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.top-button:hover {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-}
-
-.main-container {
-    position: fixed;
-    top: 90px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1400px;
-    height: calc(100vh - 140px);
-    display: flex;
+    width: min(620px, 100%);
     flex-direction: column;
-    padding: 40px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    align-items: center;
+    align-items: stretch;
     gap: 32px;
 }
 
 .year-section {
-    width: 100%;
-    max-width: 620px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 14px;
 }
 
 .year-separator {
-    width: 100%;
     display: flex;
     align-items: center;
     gap: 14px;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--muted-text);
     font-size: 14px;
     letter-spacing: 0.18em;
 }
 
 .year-separator::before,
 .year-separator::after {
-    content: "";
     height: 1px;
     flex: 1;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.45),
-        transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    content: "";
 }
 
 .year-separator span {
@@ -135,41 +42,38 @@ body {
 }
 
 .blog-post {
-    width: 100%;
-    min-height: 74px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background-color: rgba(9, 9, 9, 0.45);
-    padding: 18px 22px;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     display: flex;
-    justify-content: space-between;
+    min-height: 74px;
     align-items: center;
+    justify-content: space-between;
     gap: 24px;
+    padding: 18px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background-color: rgba(9, 9, 9, 0.58);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    text-decoration: none;
+    transition: transform 180ms ease, border-color 180ms ease;
 }
 
 .blog-post:hover {
-    transform: translateY(-2px);
     border-color: #444;
+    transform: translateY(-2px);
+    text-decoration: none;
 }
 
 .post-title-group {
     display: flex;
+    min-width: 0;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
 .post-title {
-    font-size: 18px;
     color: #fff;
+    font-size: 18px;
 }
 
 .post-tags {
@@ -180,99 +84,45 @@ body {
 }
 
 .post-tag {
-    font-size: 12px;
     padding: 3px 8px;
-    border-radius: 999px;
     border: 1px solid;
+    border-radius: 999px;
+    font-size: 12px;
 }
 
 .tag-life {
-    color: #a8f0c0;
-    background-color: rgba(76, 175, 112, 0.14);
     border-color: rgba(168, 240, 192, 0.32);
+    background-color: rgba(76, 175, 112, 0.14);
+    color: #a8f0c0;
 }
 
 .tag-thoughts {
-    color: #b9d6ff;
-    background-color: rgba(89, 135, 194, 0.14);
     border-color: rgba(185, 214, 255, 0.32);
+    background-color: rgba(89, 135, 194, 0.14);
+    color: #b9d6ff;
 }
 
 .tag-tech {
-    color: #ffd28a;
-    background-color: rgba(214, 148, 45, 0.14);
     border-color: rgba(255, 210, 138, 0.32);
+    background-color: rgba(214, 148, 45, 0.14);
+    color: #ffd28a;
 }
 
 .post-date {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.65);
     flex: 0 0 auto;
-}
-
-.post-footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 10px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--muted-text);
     font-size: 14px;
 }
 
-.view-count::before {
-    content: "👁 ";
-    margin-right: 4px;
-}
-
-@media screen and (max-width: 768px) {
-    .main-container {
-        width: 90%;
-        padding: 20px;
+@media (max-width: 600px) {
+    .blog-page {
+        padding: 76px 14px 86px;
     }
 
     .blog-post {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+        padding: 16px;
     }
-}
-
-@media screen and (max-width: 480px) {
-    .main-container {
-        padding: 15px;
-        top: 70px;
-        height: calc(100vh - 100px);
-    }
-
-    .no-posts-message {
-        font-size: 13px;
-    }
-}
-
-.no-posts-message {
-    color: #ffffffda;
-    font-size: 15px;
-}
-
-.copyright {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
-}
-
-.bottom-left-image {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 222px;
-    height: auto;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.bottom-left-image:hover {
-    opacity: 1;
 }

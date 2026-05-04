@@ -1,285 +1,46 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no" />
-        <title>Hi if you even care</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hi if you even care</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <script src="../js/site.js" defer></script>
+</head>
+<body>
+    <div class="stars"></div>
 
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <link rel="stylesheet" href="../css/main.css" />
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="https://2264.pw" class="top-button">home</a>
+        <a href="https://2264.pw/blog" class="top-button">blog</a>
+        <a href="https://2264.pw/files" class="top-button">files</a>
+    </nav>
 
-        <style>
-            :root {
-                --bg: #030307;
-                --bg-panel: rgba(255, 255, 255, 0.04);
-                --text: #e6edf3;
-                --muted: #9da7b1;
-                --border: rgba(255, 255, 255, 0.08);
-                --link: #e6edf3;
-                --link-hover: rgba(230, 237, 243, 0.7);
-                --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-            }
-
-            html, body { margin: 0; padding: 0; min-height: 100vh; }
-
-
-            .top-buttons {
-                position: absolute;
-                top: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                gap: 20px;
-                z-index: 1000;
-            }
-
-            .container {
-                width: 92%;
-                max-width: 860px;
-                margin: 0 auto;
-                padding: 96px 0 48px 0;
-            }
-
-            .card {
-                background: rgba(9, 9, 9, 0.45);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                box-shadow: var(--shadow);
-                padding: 34px;
-            }
-
-            .post-header {
-                border-bottom: 1px solid var(--border);
-                padding-bottom: 16px;
-                margin-bottom: 22px;
-            }
-
-            .post-title {
-                font-size: 26px;
-                margin: 0 0 8px 0;
-            }
-
-            .post-date {
-                font-size: 14px;
-                color: var(--muted);
-            }
-
-            .post-content {
-                line-height: 1.7;
-                font-size: 16px;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .post-content h1,
-            .post-content h2,
-            .post-content h3,
-            .post-content h4,
-            .post-content h5,
-            .post-content h6 {
-                line-height: 1.25;
-                margin: 22px 0 12px 0;
-                font-weight: 700;
-            }
-
-            .post-content p { margin: 0 0 14px 0; }
-            .post-content a { color: var(--link); text-decoration: none; }
-            .post-content a:hover { color: var(--link-hover); text-decoration: underline; }
-            .post-content blockquote { border-left: 3px solid var(--border); padding: 0 1em; color: var(--muted); margin: 0 0 16px 0; }
-            .post-content code { background: rgba(255,255,255,0.06); padding: 0.2em 0.4em; border-radius: 6px; }
-            .post-content pre { background: rgba(0,0,0,0.45); padding: 14px; border-radius: 8px; overflow: auto; }
-            .post-content img { max-width: 100%; height: auto; }
-            .post-content ul, .post-content ol { padding-left: 1.4em; margin-bottom: 14px; }
-            .post-content hr { border: 0; height: 1px; background: var(--border); margin: 22px 0; }
-
-            footer.copyright {
-                text-align: center;
-                color: var(--muted);
-                font-size: 14px;
-                margin-top: 22px;
-            }
-
-            @media (max-width: 768px) {
-                .container { width: 95%; padding-top: 82px; }
-                .post-title { font-size: 22px; }
-                .post-content { font-size: 15px; }
-                .nav { gap: 16px; }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="stars"></div>
-        <div class="top-buttons">
-            <a href="https://2264.pw" class="top-button">home</a>
-            <a href="https://2264.pw/blog" class="top-button">blog</a>
-            <a href="https://2264.pw/files" class="top-button">files</a>
-        </div>
-
-        <main class="container">
-            <article class="card">
+    <main class="post-page page-layer">
+        <article class="post-container">
+            <div class="post-card">
                 <header class="post-header">
                     <h1 class="post-title">Hi if you even care</h1>
                     <div class="post-date">Friday, 26 September 2025</div>
                 </header>
-                <section id="content" class="post-content"></section>
-            </article>
-        </main>
+                <section class="post-content">
+                    <p>Hey, welcome to the most boring part of my website… or maybe not. I've been putting this off for a while, but I've got a lot to say and this felt like the right moment to start.</p>
+                    <p>Here I'll talk mostly about tech and IRL stuff, plus anything related to my hobbies that pops up and feels worth sharing.</p>
+                    <p>Anyway, regarding this website It's my first one. You can probably tell because there are a hundred little errors and some sloppy code… but it <em>(should)</em> work :)</p>
+                    <p>Cya</p>
+                    <blockquote>
+                        <img src="../assets/img/krokmou/klorp.png" alt="Klorp" width="150" height="150">
+                    </blockquote>
+                </section>
+            </div>
+        </article>
+    </main>
 
-        <script type="text/markdown" id="post-markdown">
-Hey, welcome to the most boring part of my website… or maybe not.
-I've been putting this off for a while, but I've got a lot to say and this felt like the right moment to start.
-
-Here I'll talk mostly about tech and IRL stuff, plus anything related to my hobbies that pops up and feels worth sharing.
-
-Anyway, regarding this website It's my first one. You can probably tell because there are a hundred little errors and some sloppy code… but it _(should)_ work :)
-
-Cya
-> <img src="../assets/img/krokmou/klorp.png" alt="Klorp" width="150" />
-
-        </script>
-
-        <script>
-            if (window.marked) {
-                marked.setOptions({
-                    gfm: true,
-                    breaks: true,
-                    smartypants: true,
-                    highlight: function (code, lang) {
-                        try {
-                            if (window.hljs && lang && hljs.getLanguage(lang)) {
-                                return hljs.highlight(code, { language: lang }).value;
-                            }
-                        } catch (_) {}
-                        return code;
-                    },
-                });
-            }
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const container = document.getElementById("content");
-                const source = document.getElementById("post-markdown");
-                const md = source ? source.textContent : "";
-                const html = window.marked ? marked.parse(md) : md;
-                container.innerHTML = html;
-                if (window.hljs) {
-                    document.querySelectorAll("pre code").forEach((el) => hljs.highlightElement(el));
-                }
-            });
-        </script>
-
-        <script>
-            function initBackgroundToggle() {
-                const bgToggle = document.getElementById('bgToggle');
-                let isNebula = false;
-
-                document.body.style.backgroundColor = '#000';
-                document.body.style.backgroundImage = 'none';
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundAttachment = 'fixed';
-
-                function toggleBackground() {
-                    isNebula = !isNebula;
-                    if (isNebula) {
-                        document.body.style.backgroundImage = 'url("../assets/img/2264.png")';
-                    } else {
-                        document.body.style.backgroundImage = 'none';
-                    }
-                }
-
-                if (bgToggle) {
-                    bgToggle.addEventListener('click', toggleBackground);
-                }
-
-                document.body.addEventListener('dblclick', function(e) {
-                    if (e.target === document.body) {
-                        toggleBackground();
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            function createStars() {
-                const stars = document.querySelector('.stars');
-                const count = 200;
-
-                stars.innerHTML = '';
-                for (let i = 0; i < count; i++) {
-                    createStar(stars);
-                }
-            }
-
-            window.addEventListener('resize', createStars);
-
-            function createStar(container) {
-                const element = document.createElement('div');
-                element.classList.add('star');
-                resetElement(element);
-                container.appendChild(element);
-                animateStar(element);
-            }
-
-            function resetElement(element) {
-                element.style.left = `${Math.random() * 100}%`;
-                element.style.top = `${Math.random() * 100}%`;
-            }
-
-            function animateStar(star) {
-                star.animate([
-                    { transform: 'translate(0, 0)' },
-                    { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
-                ], {
-                    duration: Math.random() * 3000 + 3000,
-                    iterations: Infinity,
-                    direction: 'alternate',
-                    easing: 'ease-in-out'
-                });
-
-                star.animate([
-                    { opacity: Math.random() * 0.5 + 0.1 },
-                    { opacity: Math.random() * 0.3 + 0.7 },
-                    { opacity: Math.random() * 0.5 + 0.1 }
-                ], {
-                    duration: Math.random() * 3000 + 2000,
-                    iterations: Infinity,
-                    direction: 'alternate',
-                    easing: 'ease-in-out'
-                });
-            }
-
-            function checkElementPositions() {
-                const elements = document.querySelectorAll('.star');
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-
-                elements.forEach(element => {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
-                        resetElement(element);
-                        animateStar(element);
-                    }
-                });
-
-                requestAnimationFrame(checkElementPositions);
-            }
-
-            createStars();
-            checkElementPositions();
-        </script>
-
-        <script>
-            fetch("../footer.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.body.insertAdjacentHTML("beforeend", data);
-                    initBackgroundToggle();
-                })
-                .catch(() => {});
-        </script>
-    </body>
+    <footer class="site-footer">
+        <button id="bgToggle" class="footer-logo-button" type="button" aria-label="Toggle nebula background">
+            <img src="../assets/img/logo.png" alt="" width="150" height="50">
+        </button>
+    </footer>
+</body>
 </html>

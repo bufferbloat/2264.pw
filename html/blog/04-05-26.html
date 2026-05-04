@@ -1,234 +1,45 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no" />
-        <title>its been over 9 months now</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>its been over 9 months now</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <script src="../js/site.js" defer></script>
+</head>
+<body>
+    <div class="stars"></div>
 
-        <link rel="stylesheet" href="../css/main.css" />
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="https://2264.pw" class="top-button">home</a>
+        <a href="https://2264.pw/blog" class="top-button">blog</a>
+        <a href="https://2264.pw/files" class="top-button">files</a>
+    </nav>
 
-        <style>
-            :root {
-                --bg: #030307;
-                --bg-panel: rgba(255, 255, 255, 0.04);
-                --text: #e6edf3;
-                --muted: #9da7b1;
-                --border: rgba(255, 255, 255, 0.08);
-                --link: #e6edf3;
-                --link-hover: rgba(230, 237, 243, 0.7);
-                --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-            }
-
-            html, body { margin: 0; padding: 0; min-height: 100vh; }
-
-            .top-buttons {
-                position: absolute;
-                top: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                gap: 20px;
-                z-index: 1000;
-            }
-
-            .container {
-                width: 92%;
-                max-width: 860px;
-                margin: 0 auto;
-                padding: 96px 0 48px 0;
-            }
-
-            .card {
-                background: rgba(9, 9, 9, 0.45);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                box-shadow: var(--shadow);
-                padding: 34px;
-            }
-
-            .post-header {
-                border-bottom: 1px solid var(--border);
-                padding-bottom: 16px;
-                margin-bottom: 22px;
-            }
-
-            .post-title {
-                font-size: 26px;
-                margin: 0 0 8px 0;
-            }
-
-            .post-date {
-                font-size: 14px;
-                color: var(--muted);
-            }
-
-            .post-content {
-                line-height: 1.7;
-                font-size: 16px;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .post-content p { margin: 0 0 14px 0; }
-            .post-content a { color: #4da3ff; text-decoration: underline; }
-            .post-content a:hover { color: #8fc4ff; }
-
-            footer.copyright {
-                text-align: center;
-                color: var(--muted);
-                font-size: 14px;
-                margin-top: 22px;
-            }
-
-            @media (max-width: 768px) {
-                .container { width: 95%; padding-top: 82px; }
-                .post-title { font-size: 22px; }
-                .post-content { font-size: 15px; }
-                .nav { gap: 16px; }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="stars"></div>
-        <div class="top-buttons">
-            <a href="https://2264.pw" class="top-button">home</a>
-            <a href="https://2264.pw/blog" class="top-button">blog</a>
-            <a href="https://2264.pw/files" class="top-button">files</a>
-        </div>
-
-        <main class="container">
-            <article class="card">
+    <main class="post-page page-layer">
+        <article class="post-container">
+            <div class="post-card">
                 <header class="post-header">
                     <h1 class="post-title">Krokmou</h1>
                     <div class="post-date">Monday, 4 May 2026</div>
                 </header>
                 <section class="post-content">
                     <p>It's been over 9 months now since our cat, Krokmou, passed away on the morning of August 3 and I still miss him most of the time. I also still feel kind of a deep pain in my stomach about how he was taken away. We made a great little tomb where we buried him and I’m sure he would love the place since it’s full of nature with life all around and plenty of sun for him to sunbathe all day.</p>
-
                     <p>Since then we've had this cat from a family member at home but it’s not really the same. This loss really made me aware of how the people and pets we love can be gone from one day to another. Because of that I've been trying to enjoy more of my time with my dog so I won't have as many regrets when he eventually passes away too.</p>
-
                     <p>Death is really something strange and powerful and it's hard to get over… it's just a weird feeling.</p>
-
                     <p>I also kept some of Krokmou's hair before burying him so it feels like he’s still kind of here in a way, i guess that's part of the grieving process. Reading online about other people experiencing pet loss helped me a lot.</p>
-
                     <p>Anyway, thanks for reading this kind of miserable post, and take care of your beloved pets.</p>
-
                     <p><a href="https://2264.pw/krokmou">2264.pw/krokmou</a></p>
                 </section>
-            </article>
-        </main>
+            </div>
+        </article>
+    </main>
 
-        <script>
-            function initBackgroundToggle() {
-                const bgToggle = document.getElementById('bgToggle');
-                let isNebula = false;
-
-                document.body.style.backgroundColor = '#000';
-                document.body.style.backgroundImage = 'none';
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundAttachment = 'fixed';
-
-                function toggleBackground() {
-                    isNebula = !isNebula;
-                    if (isNebula) {
-                        document.body.style.backgroundImage = 'url("../assets/img/2264.png")';
-                    } else {
-                        document.body.style.backgroundImage = 'none';
-                    }
-                }
-
-                if (bgToggle) {
-                    bgToggle.addEventListener('click', toggleBackground);
-                }
-
-                document.body.addEventListener('dblclick', function(e) {
-                    if (e.target === document.body) {
-                        toggleBackground();
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            function createStars() {
-                const stars = document.querySelector('.stars');
-                const count = 200;
-
-                stars.innerHTML = '';
-                for (let i = 0; i < count; i++) {
-                    createStar(stars);
-                }
-            }
-
-            window.addEventListener('resize', createStars);
-
-            function createStar(container) {
-                const element = document.createElement('div');
-                element.classList.add('star');
-                resetElement(element);
-                container.appendChild(element);
-                animateStar(element);
-            }
-
-            function resetElement(element) {
-                element.style.left = `${Math.random() * 100}%`;
-                element.style.top = `${Math.random() * 100}%`;
-            }
-
-            function animateStar(star) {
-                star.animate([
-                    { transform: 'translate(0, 0)' },
-                    { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
-                ], {
-                    duration: Math.random() * 3000 + 3000,
-                    iterations: Infinity,
-                    direction: 'alternate',
-                    easing: 'ease-in-out'
-                });
-
-                star.animate([
-                    { opacity: Math.random() * 0.5 + 0.1 },
-                    { opacity: Math.random() * 0.3 + 0.7 },
-                    { opacity: Math.random() * 0.5 + 0.1 }
-                ], {
-                    duration: Math.random() * 3000 + 2000,
-                    iterations: Infinity,
-                    direction: 'alternate',
-                    easing: 'ease-in-out'
-                });
-            }
-
-            function checkElementPositions() {
-                const elements = document.querySelectorAll('.star');
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-
-                elements.forEach(element => {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.bottom < 0 || rect.top > viewportHeight || rect.right < 0 || rect.left > viewportWidth) {
-                        resetElement(element);
-                        animateStar(element);
-                    }
-                });
-
-                requestAnimationFrame(checkElementPositions);
-            }
-
-            createStars();
-            checkElementPositions();
-        </script>
-
-        <script>
-            fetch("../footer.html")
-                .then((response) => response.text())
-                .then((data) => {
-                    document.body.insertAdjacentHTML("beforeend", data);
-                    initBackgroundToggle();
-                })
-                .catch(() => {});
-        </script>
-    </body>
+    <footer class="site-footer">
+        <button id="bgToggle" class="footer-logo-button" type="button" aria-label="Toggle nebula background">
+            <img src="../assets/img/logo.png" alt="" width="150" height="50">
+        </button>
+    </footer>
+</body>
 </html>
