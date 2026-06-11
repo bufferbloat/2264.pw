@@ -67,24 +67,6 @@
     object-fit: cover;
 }
 
-.status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin-right: 6px;
-    border-radius: 50%;
-}
-
-.status-dot--green {
-    background-color: #3bd16f;
-    box-shadow: 0 0 6px rgba(59, 209, 111, 0.7);
-}
-
-.status-dot--red {
-    background-color: #ff4d4d;
-    box-shadow: 0 0 6px rgba(255, 77, 77, 0.7);
-}
-
 #trackInfo {
     min-width: 0;
 }

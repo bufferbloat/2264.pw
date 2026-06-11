@@ -44,6 +44,7 @@ config.dev.js
 
 
 *.bak
+*.bak-*
 *.backup
 *.[0-9] 
 

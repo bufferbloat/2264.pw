@@ -6,6 +6,7 @@ services:
     container_name: nginx
     networks:
       - nginx-docker
+      - yearnwebsite_default
     ports:
       - "80:80"
       - "443:443"
@@ -17,4 +18,6 @@ services:
 
 networks:
   nginx-docker:
+    external: true
+  yearnwebsite_default:
     external: true

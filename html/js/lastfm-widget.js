@@ -22,11 +22,7 @@ function replaceWidgetContent(...nodes) {
 function createStatusLine(isPlaying) {
     const status = document.createElement("p");
     status.className = "now-playing-text";
-
-    const dot = document.createElement("span");
-    dot.className = `status-dot ${isPlaying ? "status-dot--green" : "status-dot--red"}`;
-
-    status.append(dot, isPlaying ? "now listening" : "last listened");
+    status.textContent = isPlaying ? "now listening" : "last listened";
     return status;
 }
 

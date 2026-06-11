@@ -1,4 +1,6 @@
 .home-layout {
+    --accent: #4641ec;
+
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -34,6 +36,23 @@
     color: rgba(255, 255, 255, 0.86);
     font-size: 15px;
     line-height: 1.45;
+}
+
+.famfamfam-flags {
+    display: inline-block;
+    width: 16px;
+    height: 11px;
+    background: url("../assets/img/famfamfam-flags.png") no-repeat;
+    background-size: 224px 199px;
+}
+
+.famfamfam-flags.fr {
+    background-position: -112px -66px;
+}
+
+.country-flag {
+    display: inline-block;
+    vertical-align: -1px;
 }
 
 .projects-list {
