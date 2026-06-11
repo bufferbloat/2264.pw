@@ -1,0 +1,53 @@
+.sitemap-body {
+    display: block;
+}
+
+.sitemap-page {
+    width: min(500px, calc(100% - 48px));
+    margin: 32px auto;
+}
+
+.sitemap-page h1 {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.sitemap-list,
+.sitemap-list ul {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.8;
+    list-style: none;
+}
+
+.sitemap-list ul {
+    margin-left: 18px;
+}
+
+.sitemap-list li::before {
+    margin-right: 8px;
+    color: rgba(255, 255, 255, 0.35);
+    content: ">";
+}
+
+.sitemap-list ul li::before {
+    content: "-";
+}
+
+.sitemap-list a {
+    color: rgba(255, 255, 255, 0.76);
+    text-decoration: underline;
+}
+
+.sitemap-list a:hover {
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .sitemap-page {
+        width: calc(100% - 28px);
+        margin: 24px auto;
+    }
+}

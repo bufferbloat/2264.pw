@@ -30,6 +30,7 @@ out/
 
 
 *.conf
+!nginx.conf
 nginx.pid
 nginx.lock
 

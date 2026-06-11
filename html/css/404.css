@@ -1,0 +1,55 @@
+.error-body {
+    overflow: hidden;
+}
+
+.error-page {
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px;
+    text-align: center;
+}
+
+.error-composition {
+    position: relative;
+    display: block;
+    width: min(420px, 82vw);
+    user-select: none;
+}
+
+.error-composition img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+.error-label {
+    position: absolute;
+    right: 0;
+    bottom: 7%;
+    left: 0;
+    z-index: 1;
+    color: #fff;
+    font-size: clamp(24px, 7vw, 36px);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.home-link {
+    margin-top: 18px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+.home-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
