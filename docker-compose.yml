@@ -1,23 +1,14 @@
-version: '3'
-
 services:
-  nginx:
+  web:
     image: nginx:latest
-    container_name: nginx
+    container_name: 2264-web
     networks:
       - nginx-docker
-      - yearnwebsite_default
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - /root/nginx-docker/html:/usr/share/nginx/html
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./html:/usr/share/nginx/html:ro
     restart: unless-stopped
 
 networks:
   nginx-docker:
-    external: true
-  yearnwebsite_default:
     external: true

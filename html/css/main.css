@@ -10,7 +10,7 @@
 }
 
 .main-container {
-    width: min(650px, 100%);
+    width: min(600px, 100%);
     border: 1px solid var(--panel-border);
     background-color: var(--panel-bg);
     padding: 40px;
