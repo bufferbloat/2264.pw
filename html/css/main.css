@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Monofur Nerd Font";
+    src:
+        local("Monofur Nerd Font Bold"),
+        url("../assets/fonts/monofur-nerd-font/MonofurNerdFont-Bold.ttf") format("truetype");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
 .home-layout {
     --accent: #4641ec;
 
@@ -28,7 +38,9 @@
 .section-title {
     margin: 0 0 18px;
     color: #fff;
+    font-family: "Monofur Nerd Font", monospace;
     font-size: 25px;
+    font-weight: 700;
     line-height: 1.2;
 }
 
