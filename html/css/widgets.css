@@ -78,24 +78,49 @@
 }
 
 #trackInfo {
+    flex: 1;
     min-width: 0;
 }
 
 #trackName,
 #artistName {
+    width: 100%;
     margin: 0;
     overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #trackName {
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.marquee-viewport .marquee-text {
+    display: inline-block;
+    min-width: max-content;
+    transform: translate3d(0, 0, 0);
+}
+
+.marquee-viewport.is-marquee .marquee-text {
+    animation: text-marquee var(--marquee-duration) linear infinite;
+    will-change: transform;
+}
+
+@keyframes text-marquee {
+    0%,
+    10% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    90%,
+    100% {
+        transform: translate3d(var(--marquee-offset), 0, 0);
+    }
 }
 
 #artistName {
     color: rgba(255, 255, 255, 0.72);
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .widget-message {
@@ -108,5 +133,16 @@
 @media (max-width: 980px) {
     .widgets-container {
         width: min(650px, 100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-viewport.is-marquee .marquee-text {
+        display: block;
+        min-width: 0;
+        max-width: 100%;
+        animation: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

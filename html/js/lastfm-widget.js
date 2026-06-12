@@ -2,9 +2,11 @@
 // https://max.nekoweb.org/resources/license.txt
 const USERNAME = "wayclient";
 const BASE_URL = `https://lastfm-last-played.biancarosa.com.br/${USERNAME}/latest-song`;
-const POLL_INTERVAL_MS = 30000;
+const POLL_INTERVAL_MS = 5000;
 
 let lastSuccessfulTrack = null;
+let renderedTrackKey = null;
+let marqueeCleanups = [];
 
 function getWidget() {
     return document.getElementById("listening");
@@ -26,13 +28,82 @@ function createStatusLine(isPlaying) {
     return status;
 }
 
+function getImageUrl(track) {
+    return track.image?.[1]?.["#text"] || track.image?.[0]?.["#text"] || "";
+}
+
+function getTrackKey(track) {
+    return JSON.stringify([
+        Boolean(track["@attr"]?.nowplaying),
+        track.name || "",
+        track.artist?.["#text"] || "",
+        track.album?.["#text"] || "",
+        getImageUrl(track)
+    ]);
+}
+
+function clearMarquees() {
+    marqueeCleanups.forEach((cleanup) => cleanup());
+    marqueeCleanups = [];
+}
+
+function initializeMarquee(viewport, text) {
+    let frame = null;
+
+    const updateMarquee = () => {
+        frame = null;
+        viewport.classList.remove("is-marquee");
+        viewport.style.removeProperty("--marquee-offset");
+        viewport.style.removeProperty("--marquee-duration");
+
+        const overflowDistance = Math.ceil(text.scrollWidth - viewport.clientWidth);
+        if (overflowDistance <= 1) {
+            return;
+        }
+
+        const travelSeconds = Math.max(4, overflowDistance / 18);
+        const durationSeconds = travelSeconds + 2;
+        viewport.style.setProperty("--marquee-offset", `-${overflowDistance}px`);
+        viewport.style.setProperty("--marquee-duration", `${durationSeconds.toFixed(2)}s`);
+        void viewport.offsetWidth;
+        viewport.classList.add("is-marquee");
+    };
+
+    const scheduleUpdate = () => {
+        if (frame !== null) {
+            cancelAnimationFrame(frame);
+        }
+
+        frame = requestAnimationFrame(updateMarquee);
+    };
+
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(viewport);
+    scheduleUpdate();
+
+    document.fonts?.ready.then(() => {
+        if (viewport.isConnected) {
+            scheduleUpdate();
+        }
+    });
+
+    marqueeCleanups.push(() => {
+        observer.disconnect();
+        if (frame !== null) {
+            cancelAnimationFrame(frame);
+        }
+    });
+}
+
 function renderTrack(track) {
+    clearMarquees();
+
     const isPlaying = Boolean(track["@attr"]?.nowplaying);
     const wrapper = document.createElement("div");
     wrapper.className = "content-wrapper";
 
     const image = document.createElement("img");
-    const imageUrl = track.image?.[1]?.["#text"] || track.image?.[0]?.["#text"] || "";
+    const imageUrl = getImageUrl(track);
     image.src = imageUrl;
     image.alt = track.album?.["#text"] ? `${track.album["#text"]} album cover` : "Album cover";
     image.loading = "lazy";
@@ -42,18 +113,38 @@ function renderTrack(track) {
 
     const trackName = document.createElement("h3");
     trackName.id = "trackName";
-    trackName.textContent = track.name || "Unknown track";
+    trackName.className = "marquee-viewport";
+    const trackTitle = track.name || "Unknown track";
+    trackName.title = trackTitle;
+
+    const trackNameText = document.createElement("span");
+    trackNameText.className = "marquee-text";
+    trackNameText.textContent = trackTitle;
+    trackName.append(trackNameText);
 
     const artistName = document.createElement("p");
     artistName.id = "artistName";
-    artistName.textContent = track.artist?.["#text"] || "Unknown artist";
+    artistName.className = "marquee-viewport";
+    const artist = track.artist?.["#text"] || "Unknown artist";
+    artistName.title = artist;
+
+    const artistNameText = document.createElement("span");
+    artistNameText.className = "marquee-text";
+    artistNameText.textContent = artist;
+    artistName.append(artistNameText);
 
     info.append(trackName, artistName);
     wrapper.append(image, info);
     replaceWidgetContent(createStatusLine(isPlaying), wrapper);
+    renderedTrackKey = getTrackKey(track);
+    initializeMarquee(trackName, trackNameText);
+    initializeMarquee(artistName, artistNameText);
 }
 
 function renderMessage(message) {
+    clearMarquees();
+    renderedTrackKey = null;
+
     const text = document.createElement("p");
     text.className = "widget-message";
     text.textContent = message;
@@ -73,14 +164,18 @@ async function getTrack() {
         }
 
         lastSuccessfulTrack = json.track;
-        renderTrack(json.track);
+        if (getTrackKey(json.track) !== renderedTrackKey) {
+            renderTrack(json.track);
+        }
     } catch (error) {
-        if (lastSuccessfulTrack) {
+        if (lastSuccessfulTrack && getTrackKey(lastSuccessfulTrack) !== renderedTrackKey) {
             renderTrack(lastSuccessfulTrack);
             return;
         }
 
-        renderMessage("Error loading Last.fm data");
+        if (!lastSuccessfulTrack) {
+            renderMessage("Error loading Last.fm data");
+        }
     }
 }
 
