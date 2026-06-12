@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 250px;
+    width: 203px;
 }
 
 .widget-box {
@@ -10,10 +10,6 @@
     border: 1px solid var(--panel-border);
     background-color: var(--panel-bg);
     padding: 20px;
-}
-
-.widget-lastfm {
-    min-height: 150px;
 }
 
 .widget-status {
@@ -24,7 +20,14 @@
 #listening .now-playing-text {
     margin: 0 0 14px;
     color: #fff;
-    font-size: 15px;
+    font-family: "Monofur Nerd Font", monospace;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.status-title.loading-title,
+#listening .now-playing-text.loading-title {
+    color: rgba(255, 255, 255, 0.55);
 }
 
 #statuscafe {
@@ -48,7 +51,7 @@
 
 #listening {
     display: flex;
-    min-height: 108px;
+    min-height: 100px;
     flex-direction: column;
     color: #fff;
 }
@@ -65,6 +68,13 @@
     flex: 0 0 auto;
     background-color: rgba(255, 255, 255, 0.1);
     object-fit: cover;
+}
+
+#listening .cover-placeholder {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 auto;
+    background-color: rgba(255, 255, 255, 0.18);
 }
 
 #trackInfo {

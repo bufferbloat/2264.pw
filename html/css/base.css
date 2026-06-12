@@ -1,8 +1,18 @@
+@font-face {
+    font-family: "Monofur Nerd Font";
+    src:
+        local("Monofur Nerd Font Bold"),
+        url("../assets/fonts/monofur-nerd-font/MonofurNerdFont-Bold.ttf") format("truetype");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
 :root {
     --page-bg: #000;
     --page-text: #fff;
     --panel-bg: rgba(0, 0, 0, 0.7);
-    --panel-border: #333;
+    --panel-border: #33333396;
     --muted-text: rgba(255, 255, 255, 0.68);
     --link-hover: rgba(255, 255, 255, 0.65);
     --accent: #ff6969;

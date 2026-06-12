@@ -47,7 +47,7 @@
     justify-content: space-between;
     gap: 24px;
     padding: 18px 22px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--panel-border);
     border-radius: 8px;
     background-color: rgba(9, 9, 9, 0.58);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
@@ -57,7 +57,7 @@
 }
 
 .blog-post:hover {
-    border-color: #444;
+    border-color: var(--panel-border);
     transform: translateY(-2px);
     text-decoration: none;
 }

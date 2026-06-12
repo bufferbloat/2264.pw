@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>home</title>
     <link rel="preload" href="assets/img/2264.png" as="image">
-    <link rel="stylesheet" href="css/base.css?v=20260504b">
-    <link rel="stylesheet" href="css/main.css?v=20260611f">
-    <link rel="stylesheet" href="css/widgets.css?v=20260611c">
+    <link rel="stylesheet" href="css/base.css?v=20260612b">
+    <link rel="stylesheet" href="css/main.css?v=20260612a">
+    <link rel="stylesheet" href="css/widgets.css?v=20260612k">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="js/site.js" defer></script>
 </head>
@@ -72,10 +72,15 @@
 
         <aside class="widgets-container" aria-label="Live widgets">
             <div class="widget-box widget-lastfm">
-                <div id="listening"></div>
+                <div id="listening">
+                    <p class="now-playing-text loading-title">Loading...</p>
+                    <div class="content-wrapper">
+                        <div class="cover-placeholder" aria-hidden="true"></div>
+                    </div>
+                </div>
             </div>
             <div class="widget-box widget-status">
-                <div class="status-title">status</div>
+                <div class="status-title loading-title">Loading...</div>
                 <div id="statuscafe">
                     <div id="statuscafe-username"></div>
                     <div id="statuscafe-content"></div>
@@ -87,6 +92,6 @@
     <!--# include virtual="/components/footer.html" -->
 
     <script src="js/lastfm-widget.js?v=20260611b"></script>
-    <script src="https://status.cafe/current-status.js?name=way" defer></script>
+    <script src="js/status-widget.js?v=20260612a" defer></script>
 </body>
 </html>
