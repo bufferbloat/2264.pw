@@ -1,6 +1,6 @@
 .files-page {
     width: 100%;
-    padding: 32px 24px;
+    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .files-container {
@@ -20,10 +20,6 @@
 }
 
 @media (max-width: 600px) {
-    .files-page {
-        padding: 24px 14px;
-    }
-
     .files-container {
         padding: 14px;
     }

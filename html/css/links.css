@@ -4,7 +4,7 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
-    padding: 32px 24px;
+    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .links-container {
@@ -64,7 +64,6 @@
 
 .directory-list a:hover {
     color: #fff;
-    text-decoration: underline;
 }
 
 .buttons {
@@ -83,7 +82,6 @@
 
 .button-embed img {
     display: block;
-    flex: 0 0 auto;
 }
 
 .button-embed textarea {
@@ -104,7 +102,7 @@
 }
 
 .button-embed textarea::selection {
-    background: #4641ec;
+    background: var(--accent);
     color: #fff;
 }
 
@@ -118,10 +116,7 @@
     flex-wrap: wrap;
 }
 
-.people-buttons img {
-    display: block;
-}
-
+.people-buttons img,
 .people-buttons a {
     display: block;
 }
@@ -131,7 +126,7 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    padding: 32px 24px;
+    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .resources-content {
@@ -161,10 +156,51 @@
 
 .resources-container {
     width: 100%;
+    padding: 30px;
+}
+
+.resources-container h1 {
+    font-size: 25px;
+}
+
+.resources-container .container-description {
+    font-size: 15px;
 }
 
 .resources-list {
-    margin-top: 14px;
+    margin-top: 34px;
+}
+
+.resource-category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0;
+    padding: 8px 12px;
+    background: var(--accent-surface);
+    color: #fff;
+}
+
+.resource-category h2 {
+    margin: 0;
+    font-family: var(--content-font);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: lowercase;
+}
+
+.resource-category p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 11px;
+    line-height: 1.3;
+    text-align: right;
+}
+
+.resource-group + .resource-group {
+    margin-top: 24px;
 }
 
 .resource-entry {
@@ -175,19 +211,19 @@
     background: rgba(255, 255, 255, 0.035);
 }
 
-.resource-entry:nth-child(even) {
+.resource-entries > .resource-entry:nth-child(even) {
     background: rgba(255, 255, 255, 0.075);
 }
 
 .resource-title {
     align-self: start;
-    color: #4641ec;
+    color: var(--accent);
     font-size: 13px;
     text-decoration: underline;
 }
 
 .resource-title:hover {
-    color: #7773ff;
+    color: var(--accent-hover);
 }
 
 .resource-description {
@@ -210,13 +246,18 @@
 }
 
 @media (max-width: 600px) {
-    .links-page,
-    .resources-page {
-        padding: 24px 14px;
-    }
-
     .resource-entry {
         grid-template-columns: 1fr;
         gap: 6px;
+    }
+
+    .resource-category {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .resource-category p {
+        text-align: left;
     }
 }
