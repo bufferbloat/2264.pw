@@ -11,7 +11,7 @@
     width: min(530px, 100%);
     border: 1px solid var(--panel-border);
     background-color: var(--panel-bg);
-    padding: 30px;
+    padding: 30px 32px;
     overflow-wrap: break-word;
 }
 
@@ -44,6 +44,50 @@
 
 .section-content p + p {
     margin-top: 1.45em;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.experience-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 4px;
+}
+
+.experience-heading h3 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.experience-heading h3 .project-link {
+    color: inherit;
+    transition: color 180ms ease;
+}
+
+.experience-heading h3 .project-link:hover {
+    color: var(--accent);
+}
+
+.experience-description {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.experience-date {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 11px;
+    line-height: 1.15;
 }
 
 .famfamfam-flags {
@@ -83,31 +127,35 @@
     text-decoration: underline;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+.project-item .project-link {
+    color: inherit;
+    transition: color 180ms ease;
 }
 
-.skill-category {
-    color: rgba(255, 255, 255, 0.8);
+.project-item .project-link:hover {
+    color: var(--accent);
 }
 
-.skill-category h3 {
-    margin: 0 0 12px;
-    font-size: 15px;
+.all-projects-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: inherit;
+    font-size: 12px;
+    transition: color 180ms ease;
 }
 
-.skill-category ul {
-    margin: 0;
-    padding: 0;
+.all-projects-link:hover {
+    color: var(--accent);
+}
+
+.stack-list {
+    color: rgba(255, 255, 255, 0.78);
     font-size: 13px;
-    line-height: 1.45;
-    list-style: none;
+    line-height: 1.55;
 }
 
-.skill-category li + li {
-    margin-top: 6px;
+.stack-list p {
+    margin: 0;
 }
 
 @media (max-width: 980px) {
@@ -119,7 +167,7 @@
 
 @media (max-width: 600px) {
     .main-container {
-        padding: 22px;
+        padding: 22px 24px;
     }
 
     .section-title {
