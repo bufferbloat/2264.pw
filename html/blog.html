@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>blog</title>
-    <link rel="stylesheet" href="css/base.css?v=20260612e">
-    <link rel="stylesheet" href="css/blog.css?v=20260612c">
+    <link rel="stylesheet" href="css/base.css?v=20260903q">
+    <link rel="stylesheet" href="css/blog.css?v=20260903m">
     <script src="js/site.js" defer></script>
 </head>
 <body>
     <div class="stars"></div>
 
-    <!--# include virtual="/components/navigation.html" -->
+    <div class="blog-banner" aria-hidden="true">
+        <img src="assets/img/blogbanner2.png?v=20260903a" alt="" width="900" height="200">
+    </div>
 
-    <main class="blog-page page-layer">
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+
+        <main class="blog-page page-layer">
         <div class="blog-list">
             <section class="year-section">
                 <div class="year-separator">
@@ -23,9 +28,6 @@
                 <a href="blog/04-05-26.html" class="blog-post">
                     <div class="post-title-group">
                         <div class="post-title">Krokmou</div>
-                        <div class="post-tags">
-                            <span class="post-tag tag-life">Life</span>
-                        </div>
                     </div>
                     <div class="post-date">04.05.2026</div>
                 </a>
@@ -39,16 +41,15 @@
                 <a href="blog/26-09-25.html" class="blog-post">
                     <div class="post-title-group">
                         <div class="post-title">Hi if you even care</div>
-                        <div class="post-tags">
-                            <span class="post-tag tag-thoughts">Thoughts</span>
-                        </div>
                     </div>
                     <div class="post-date">26.09.2025</div>
                 </a>
             </section>
         </div>
-    </main>
+        </main>
+    </div>
 
     <!--# include virtual="/components/footer.html" -->
+
 </body>
 </html>

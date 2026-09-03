@@ -1,6 +1,6 @@
 .error-page {
     display: flex;
-    min-height: 100svh;
+    min-height: calc(100svh - 120px);
     align-items: center;
     justify-content: center;
     flex-direction: column;

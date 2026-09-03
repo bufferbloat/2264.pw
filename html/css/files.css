@@ -1,6 +1,5 @@
 .files-page {
     width: 100%;
-    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .files-container {

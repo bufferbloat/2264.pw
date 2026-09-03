@@ -67,7 +67,13 @@
     height: 64px;
     flex: 0 0 auto;
     background-color: rgba(255, 255, 255, 0.1);
+    filter: grayscale(1);
     object-fit: cover;
+    transition: filter 400ms ease;
+}
+
+.widget-lastfm:hover #listening img {
+    filter: grayscale(0);
 }
 
 #listening .cover-placeholder {

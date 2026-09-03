@@ -1,10 +1,9 @@
 .home-layout {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: var(--panel-gap);
     width: 100%;
-    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .main-container {

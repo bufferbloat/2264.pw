@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hi if you even care</title>
-    <link rel="stylesheet" href="../css/base.css?v=20260612e">
-    <link rel="stylesheet" href="../css/post.css?v=20260612h">
+    <link rel="stylesheet" href="../css/base.css?v=20260903q">
+    <link rel="stylesheet" href="../css/post.css?v=20260903b">
     <script src="../js/site.js" defer></script>
 </head>
 <body>
     <div class="stars"></div>
 
-    <main class="post-page page-layer">
+    <div class="homepage-banner" aria-hidden="true">
+        <img src="../assets/img/bannerhomepage.png?v=20260903c" alt="" width="900" height="200">
+    </div>
+
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+
+        <main class="post-page page-layer">
         <article class="post-container">
             <nav class="post-path" aria-label="Blog path">
                 <a href="https://2264.eu/blog">blog</a>
@@ -35,7 +42,8 @@
                 </section>
             </div>
         </article>
-    </main>
+        </main>
+    </div>
 
     <!--# include virtual="/components/footer.html" -->
 </body>

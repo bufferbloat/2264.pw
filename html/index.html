@@ -5,20 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>home</title>
     <link rel="preload" href="assets/img/2264.png" as="image">
-    <link rel="stylesheet" href="css/base.css?v=20260612e">
-    <link rel="stylesheet" href="css/main.css?v=20260817f">
-    <link rel="stylesheet" href="css/widgets.css?v=20260612r">
+    <link rel="stylesheet" href="css/base.css?v=20260903q">
+    <link rel="stylesheet" href="css/main.css?v=20260903p">
+    <link rel="stylesheet" href="css/widgets.css?v=20260903a">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="js/site.js" defer></script>
 </head>
 <body>
     <div class="stars"></div>
 
-    <!--# include virtual="/components/navigation.html" -->
+    <div class="homepage-banner" aria-hidden="true">
+        <img src="assets/img/bannerhomepage.png?v=20260903b" alt="" width="900" height="200">
+    </div>
 
-    <main class="home-layout page-layer">
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+
+        <main class="home-layout page-layer">
         <div class="main-container">
-            <section class="section">
+            <section class="section" id="about">
                 <h1 class="section-title">hi, i’m way</h1>
                 <div class="section-content">
                     <p>a cs student based in <span class="famfamfam-flags fr country-flag" role="img" aria-label="France"></span>, mostly interested in low-level programming, embedded systems and operating systems.</p>
@@ -85,7 +90,8 @@
                 </div>
             </div>
         </aside>
-    </main>
+        </main>
+    </div>
 
     <!--# include virtual="/components/footer.html" -->
 

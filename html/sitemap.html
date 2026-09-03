@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>sitemap</title>
-    <link rel="stylesheet" href="css/base.css?v=20260612e">
-    <link rel="stylesheet" href="css/sitemap.css?v=20260611b">
+    <link rel="stylesheet" href="css/base.css?v=20260903q">
+    <link rel="stylesheet" href="css/sitemap.css?v=20260903a">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/site.js" defer></script>
 </head>
 <body class="sitemap-body">
-    <main class="sitemap-page">
-        <section aria-labelledby="sitemap-title">
-            <h1 id="sitemap-title">sitemap</h1>
-            <ul class="sitemap-list">
-                <li><a href="https://2264.eu">home</a></li>
-                <li><a href="https://2264.eu/blog">blog</a></li>
-                <li><a href="https://2264.eu/files">files</a></li>
-                <li>
-                    <a href="https://2264.eu/links">links</a>
-                    <ul>
-                        <li><a href="https://2264.eu/links/resources">resources</a></li>
-                    </ul>
-                </li>
-                <li><a href="https://2264.eu/krokmou">krokmou</a></li>
-            </ul>
-        </section>
-    </main>
+    <div class="stars"></div>
+
+    <div class="homepage-banner" aria-hidden="true">
+        <img src="assets/img/bannerhomepage.png?v=20260903c" alt="" width="900" height="200">
+    </div>
+
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+
+        <main class="sitemap-page page-layer">
+            <section aria-labelledby="sitemap-title">
+                <h1 id="sitemap-title">sitemap</h1>
+                <ul class="sitemap-list">
+                    <li><a href="https://2264.eu">home</a></li>
+                    <li><a href="https://2264.eu/about">about</a></li>
+                    <li><a href="https://2264.eu/blog">blog</a></li>
+                    <li><a href="https://2264.eu/links/resources">resources</a></li>
+                    <li><a href="https://2264.eu/links">links</a></li>
+                    <li><a href="https://2264.eu/files">files</a></li>
+                    <li><a href="https://2264.eu/krokmou">krokmou</a></li>
+                    <li><a href="https://2264.eu/sitemap" aria-current="page">sitemap</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

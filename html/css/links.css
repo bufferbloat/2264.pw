@@ -4,13 +4,6 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
-    padding: var(--page-padding-block) var(--page-padding-inline);
-}
-
-.links-container {
-    border: 1px solid var(--panel-border);
-    background-color: var(--panel-bg);
-    padding: 20px;
 }
 
 .links-side-column {
@@ -18,6 +11,12 @@
     width: 280px;
     flex-direction: column;
     gap: 20px;
+}
+
+.links-container {
+    border: 1px solid var(--panel-border);
+    background-color: var(--panel-bg);
+    padding: 20px;
 }
 
 .links-main-column {
@@ -28,7 +27,6 @@
 }
 
 .buttons-container,
-.directory-container,
 .cool-people-container {
     width: 100%;
 }
@@ -46,24 +44,6 @@
     color: rgba(255, 255, 255, 0.76);
     font-size: 12px;
     line-height: 1.45;
-}
-
-.directory-list {
-    margin: 14px 0 0;
-    padding: 0;
-    color: rgba(255, 255, 255, 0.76);
-    font-size: 12px;
-    line-height: 1.45;
-    list-style: none;
-}
-
-.directory-list a {
-    color: rgba(255, 255, 255, 0.76);
-    text-decoration: underline;
-}
-
-.directory-list a:hover {
-    color: #fff;
 }
 
 .buttons {
@@ -126,32 +106,10 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .resources-content {
-    width: min(780px, 100%);
-}
-
-.directory-path {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 13px;
-}
-
-.directory-path a {
-    color: rgba(255, 255, 255, 0.76);
-    text-decoration: underline;
-}
-
-.directory-path a:hover {
-    color: #fff;
-}
-
-.directory-path [aria-current="page"] {
-    color: rgba(255, 255, 255, 0.76);
+    width: 100%;
 }
 
 .resources-container {
@@ -236,12 +194,12 @@
 @media (max-width: 980px) {
     .links-page {
         flex-direction: column;
-        align-items: center;
+        width: min(500px, 100%);
     }
 
     .links-side-column,
     .links-main-column {
-        width: min(500px, 100%);
+        width: 100%;
     }
 }
 

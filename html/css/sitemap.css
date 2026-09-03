@@ -3,8 +3,12 @@
 }
 
 .sitemap-page {
-    width: min(500px, calc(100% - 48px));
-    margin: 32px auto;
+    width: 100%;
+}
+
+.sitemap-page > section {
+    width: min(500px, 100%);
+    margin: 0 auto;
 }
 
 .sitemap-page h1 {
@@ -47,7 +51,7 @@
 
 @media (max-width: 600px) {
     .sitemap-page {
-        width: calc(100% - 28px);
-        margin: 24px auto;
+        width: 100%;
+        margin: 0;
     }
 }

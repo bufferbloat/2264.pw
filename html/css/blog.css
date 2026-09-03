@@ -1,22 +1,52 @@
+.blog-banner {
+    position: relative;
+    z-index: 1;
+    width: min(905px, calc(100% - (2 * var(--page-padding-inline))));
+    margin: var(--panel-gap) 0 0 max(var(--page-padding-inline), calc((100% - 1020px) / 2 + var(--page-padding-inline)));
+    background-color: var(--page-bg);
+    border: 1px solid var(--panel-border);
+    opacity: 0.68;
+    transition: opacity 400ms ease;
+}
+
+.blog-banner:hover {
+    opacity: 1;
+}
+
+.blog-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+.blog-banner + .site-layout {
+    padding-top: var(--panel-gap);
+}
+
 .blog-page {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: var(--page-padding-block) var(--page-padding-inline);
+}
+
+.site-layout > .blog-page {
+    width: min(753px, 100%);
+    flex: 0 1 auto;
 }
 
 .blog-list {
     display: flex;
-    width: min(620px, 100%);
+    width: 100%;
     flex-direction: column;
     align-items: stretch;
-    gap: 32px;
+    gap: 16px;
 }
 
 .year-section {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 6px;
 }
 
 .year-separator {
@@ -30,10 +60,7 @@
 
 .year-separator::before,
 .year-separator::after {
-    height: 1px;
-    flex: 1;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-    content: "";
+    display: none;
 }
 
 .year-separator span {
@@ -42,11 +69,11 @@
 
 .blog-post {
     display: flex;
-    min-height: 74px;
+    min-height: 0;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    padding: 18px 22px;
+    padding: 12px 22px;
     border: 1px solid var(--panel-border);
     background-color: var(--panel-card-bg);
     box-shadow: var(--panel-shadow);
@@ -73,32 +100,6 @@
     font-size: 18px;
 }
 
-.post-tags {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.post-tag {
-    padding: 3px 8px;
-    border: 1px solid;
-    border-radius: 999px;
-    font-size: 12px;
-}
-
-.tag-life {
-    border-color: rgba(168, 240, 192, 0.32);
-    background-color: rgba(76, 175, 112, 0.14);
-    color: #a8f0c0;
-}
-
-.tag-thoughts {
-    border-color: rgba(185, 214, 255, 0.32);
-    background-color: rgba(89, 135, 194, 0.14);
-    color: #b9d6ff;
-}
-
 .post-date {
     flex: 0 0 auto;
     color: var(--muted-text);
@@ -110,6 +111,6 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        padding: 16px;
+        padding: 12px 14px;
     }
 }
