@@ -24,7 +24,7 @@
     --accent-hover: #7773ff;
     --accent-surface: rgba(70, 65, 236, 0.55);
     --panel-gap: 20px;
-    --nebula-image: url("../assets/img/2264.png");
+    --nebula-image: url("../assets/img/backgrounds/2264.png");
 }
 
 *,
@@ -154,6 +154,7 @@ textarea:focus-visible {
 }
 
 .site-nav a:hover,
+.site-nav a[aria-current="page"],
 .top-button:hover {
     color: #fff;
     text-decoration: underline;
@@ -207,6 +208,25 @@ textarea:focus-visible {
 .site-layout > .page-layer {
     width: min(753px, calc(100% - 160px));
     flex: 0 1 753px;
+}
+
+.homepage-layout {
+    max-width: 1053px;
+}
+
+.homepage-layout .site-nav {
+    width: 182px;
+    flex-basis: 182px;
+}
+
+.homepage-banner-wide {
+    width: min(1005px, calc(100% - (2 * var(--page-padding-inline))));
+    margin-left: max(var(--page-padding-inline), calc((100% - 1053px) / 2 + var(--page-padding-inline)));
+}
+
+.homepage-layout > .page-layer {
+    width: min(803px, calc(100% - 210px));
+    flex-basis: 803px;
 }
 
 .site-header {

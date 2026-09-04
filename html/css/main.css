@@ -14,6 +14,10 @@
     overflow-wrap: break-word;
 }
 
+.homepage-layout .main-container {
+    width: min(580px, 100%);
+}
+
 .section {
     margin-bottom: 24px;
 }
@@ -93,7 +97,7 @@
     display: inline-block;
     width: 16px;
     height: 11px;
-    background: url("../assets/img/famfamfam-flags.png") no-repeat;
+    background: url("../assets/img/icons/famfamfam-flags.png") no-repeat;
     background-size: 224px 199px;
 }
 

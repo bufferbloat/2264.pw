@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>home</title>
-    <link rel="preload" href="assets/img/2264.png" as="image">
-    <link rel="stylesheet" href="css/base.css?v=20260903q">
-    <link rel="stylesheet" href="css/main.css?v=20260903p">
-    <link rel="stylesheet" href="css/widgets.css?v=20260903a">
+    <link rel="preload" href="assets/img/banners/bannerhomepageNEW.png" as="image">
+    <link rel="stylesheet" href="css/base.css?v=20260904c">
+    <link rel="stylesheet" href="css/main.css?v=20260904a">
+    <link rel="stylesheet" href="css/widgets.css?v=20260904c">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="js/site.js" defer></script>
+    <script src="js/site.js?v=20260904a" defer></script>
 </head>
 <body>
     <div class="stars"></div>
 
-    <div class="homepage-banner" aria-hidden="true">
-        <img src="assets/img/bannerhomepage.png?v=20260903b" alt="" width="900" height="200">
+    <div class="homepage-banner homepage-banner-wide" aria-hidden="true">
+        <img src="assets/img/banners/bannerhomepageNEW.png?v=20260904a" alt="" width="1000" height="200">
     </div>
 
-    <div class="site-layout">
+    <div class="site-layout homepage-layout">
         <!--# include virtual="/components/navigation.html" -->
 
         <main class="home-layout page-layer">
@@ -74,6 +74,13 @@
         </div>
 
         <aside class="widgets-container" aria-label="Live widgets">
+            <div class="widget-box widget-status">
+                <div class="status-title loading-title">Loading...</div>
+                <div id="statuscafe">
+                    <div id="statuscafe-username"></div>
+                    <div id="statuscafe-content"></div>
+                </div>
+            </div>
             <div class="widget-box widget-lastfm">
                 <div id="listening">
                     <p class="now-playing-text loading-title">Loading...</p>
@@ -82,11 +89,10 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-box widget-status">
-                <div class="status-title loading-title">Loading...</div>
-                <div id="statuscafe">
-                    <div id="statuscafe-username"></div>
-                    <div id="statuscafe-content"></div>
+            <div class="widget-box widget-playing">
+                <div id="playing">
+                    <p class="playing-title">playing</p>
+                    <p class="playing-nothing">Nothing</p>
                 </div>
             </div>
         </aside>
@@ -97,5 +103,6 @@
 
     <script src="js/lastfm-widget.js?v=20260612e"></script>
     <script src="js/status-widget.js?v=20260612a" defer></script>
+    <script src="js/playing-widget.js?v=20260904d" defer></script>
 </body>
 </html>

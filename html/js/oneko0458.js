@@ -108,7 +108,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = 2147483647;
 
-    let nekoFile = "./assets/img/oneko.gif"
+    let nekoFile = "./assets/img/sprites/oneko.gif"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
@@ -323,7 +323,7 @@
     treat.className = "oneko-treat";
     treat.style.left = `${x}px`;
     treat.style.top = `${y}px`;
-    treat.style.backgroundImage = `url(./assets/img/treat.png)`;
+    treat.style.backgroundImage = `url(./assets/img/sprites/treat.png)`;
     document.body.appendChild(treat);
     treats.push(treat);
   }

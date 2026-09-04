@@ -93,8 +93,29 @@
         });
     }
 
+    function normalizePath(path) {
+        const normalized = path
+            .replace(/\/index\.html$/, "/")
+            .replace(/\.html$/, "")
+            .replace(/\/+$/, "");
+        return normalized || "/";
+    }
+
+    function initCurrentNavigation() {
+        const currentPath = normalizePath(window.location.pathname);
+        const currentLink = Array.from(document.querySelectorAll(".site-nav a"))
+            .map((link) => ({ link, path: normalizePath(new URL(link.href).pathname) }))
+            .filter(({ path }) => currentPath === path || (path !== "/" && currentPath.startsWith(`${path}/`)))
+            .sort((first, second) => second.path.length - first.path.length)[0];
+
+        if (currentLink) {
+            currentLink.link.setAttribute("aria-current", "page");
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         initStars();
         initBackgroundToggle();
+        initCurrentNavigation();
     });
 })();

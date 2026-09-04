@@ -83,6 +83,88 @@
     background-color: rgba(255, 255, 255, 0.18);
 }
 
+#playing {
+    display: flex;
+    min-height: 100px;
+    flex-direction: column;
+    color: #fff;
+}
+
+.playing-title {
+    margin: 0 0 14px;
+    color: #fff;
+    font-family: "Monofur Nerd Font", monospace;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.playing-title.loading-title {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.playing-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.playing-art,
+.playing-art-placeholder {
+    background-color: rgba(255, 255, 255, 0.18);
+    flex: 0 0 auto;
+}
+
+.playing-art {
+    width: auto;
+    max-width: 75px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.playing-art-placeholder {
+    width: 70px;
+    height: 100px;
+}
+
+.playing-art {
+    filter: grayscale(1);
+    transition: filter 400ms ease;
+}
+
+.widget-playing:hover .playing-art {
+    filter: grayscale(0);
+}
+
+.playing-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.playing-name,
+.playing-elapsed {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.playing-name {
+    color: #fff;
+    font-size: 12px;
+}
+
+.playing-elapsed {
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 10px;
+}
+
+.playing-nothing {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+}
+
 #trackInfo {
     flex: 1;
     min-width: 0;
