@@ -2,12 +2,38 @@ services:
   web:
     image: nginx:latest
     container_name: 2264-web
+    depends_on:
+      blog-stats:
+        condition: service_healthy
     networks:
       - nginx-docker
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./html:/usr/share/nginx/html:ro
     restart: unless-stopped
+
+  blog-stats:
+    build: ./blog-stats
+    container_name: 2264-blog-stats
+    init: true
+    networks:
+      - nginx-docker
+    volumes:
+      - blog-stats-data:/data
+      - ./html/blog:/posts:ro
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=2)"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  blog-stats-data:
 
 networks:
   nginx-docker:

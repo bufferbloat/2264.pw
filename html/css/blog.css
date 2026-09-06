@@ -115,7 +115,37 @@
 }
 
 .post-date {
-    flex: 0 0 auto;
     color: var(--muted-text);
     font-size: 14px;
+}
+
+.post-meta {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.post-card-views {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted-text);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-card-views[hidden] {
+    display: none;
+}
+
+.post-card-views svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
 }
