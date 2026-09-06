@@ -190,32 +190,3 @@
     font-size: 12px;
     line-height: 1.45;
 }
-
-@media (max-width: 980px) {
-    .links-page {
-        flex-direction: column;
-        width: min(500px, 100%);
-    }
-
-    .links-side-column,
-    .links-main-column {
-        width: 100%;
-    }
-}
-
-@media (max-width: 600px) {
-    .resource-entry {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-
-    .resource-category {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 3px;
-    }
-
-    .resource-category p {
-        text-align: left;
-    }
-}

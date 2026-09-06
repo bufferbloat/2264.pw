@@ -90,6 +90,18 @@
     color: #fff;
 }
 
+.widget-playing.is-idle {
+    padding: 14px 20px;
+}
+
+.widget-playing.is-idle #playing {
+    min-height: 0;
+}
+
+.widget-playing.is-idle .playing-title {
+    margin-bottom: 8px;
+}
+
 .playing-title {
     margin: 0 0 14px;
     color: #fff;
@@ -216,12 +228,6 @@
     color: rgba(255, 255, 255, 0.76);
     font-size: 12px;
     line-height: 1.45;
-}
-
-@media (max-width: 980px) {
-    .widgets-container {
-        width: min(650px, 100%);
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -106,23 +106,3 @@
     height: 16px;
     image-rendering: pixelated;
 }
-
-@media (max-width: 600px) {
-    .krokmou-main {
-        padding: 34px 14px 96px;
-    }
-
-    .counter-group {
-        margin-top: 52px;
-    }
-
-    .text-area {
-        margin-top: 82px;
-    }
-
-    .krokmou-photo,
-    .krokmou-photo:nth-child(even),
-    .krokmou-photo:nth-child(odd) {
-        align-items: center;
-    }
-}

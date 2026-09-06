@@ -10,6 +10,10 @@ function getWidget() {
     return document.getElementById("playing");
 }
 
+function setIdleState(isIdle) {
+    getWidget()?.closest(".widget-playing")?.classList.toggle("is-idle", isIdle);
+}
+
 function clearElapsedTimer() {
     if (elapsedInterval !== null) {
         clearInterval(elapsedInterval);
@@ -85,6 +89,7 @@ function renderNothing() {
     clearElapsedTimer();
     clearMarquee();
     currentActivity = null;
+    setIdleState(true);
 
     const widget = getWidget();
     if (!widget) {
@@ -106,6 +111,7 @@ function renderPlaying(activity) {
     clearElapsedTimer();
     clearMarquee();
     currentActivity = activity;
+    setIdleState(false);
 
     const widget = getWidget();
     if (!widget) {

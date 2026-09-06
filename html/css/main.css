@@ -160,24 +160,3 @@
 .stack-list p {
     margin: 0;
 }
-
-@media (max-width: 980px) {
-    .home-layout {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-@media (max-width: 600px) {
-    .main-container {
-        padding: 22px 24px;
-    }
-
-    .section-title {
-        font-size: 20px;
-    }
-
-    .section-content {
-        font-size: 14px;
-    }
-}

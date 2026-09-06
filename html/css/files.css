@@ -17,9 +17,3 @@
     border: 0;
     background: rgba(0, 0, 0, 0.92);
 }
-
-@media (max-width: 600px) {
-    .files-container {
-        padding: 14px;
-    }
-}
