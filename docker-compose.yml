@@ -1,29 +1,47 @@
 services:
   web:
-    image: nginx:latest
+    image: nginxinc/nginx-unprivileged:1.29-alpine
     container_name: 2264-web
+    user: "101:101"
     depends_on:
       blog-stats:
         condition: service_healthy
-    networks:
-      - nginx-docker
+      admin-web:
+        condition: service_healthy
+    networks: [nginx-docker]
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./html:/usr/share/nginx/html:ro
+      - ./generated:/srv/generated:ro
+      - ./managed/public:/srv/managed/public:ro
+      - ./media/public:/srv/media/public:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+      - /var/cache/nginx:size=32m,uid=101,gid=101
+      - /var/run:size=1m,uid=101,gid=101
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
     restart: unless-stopped
 
   blog-stats:
     build: ./blog-stats
     container_name: 2264-blog-stats
     init: true
-    networks:
-      - nginx-docker
+    networks: [nginx-docker]
+    env_file:
+      - path: .env.admin
+        required: true
+    environment:
+      BLOG_POSTS_DIRECTORY: /generated/current/blog
     volumes:
       - blog-stats-data:/data
-      - ./html/blog:/posts:ro
+      - ./generated:/generated:ro
     read_only: true
-    security_opt:
-      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=2)"]
       interval: 30s
@@ -32,8 +50,85 @@ services:
       start_period: 5s
     restart: unless-stopped
 
+  admin-web:
+    build: ./admin-web
+    container_name: 2264-admin-web
+    init: true
+    user: "2264:2264"
+    networks: [nginx-docker]
+    env_file:
+      - path: .env.admin
+        required: true
+    environment:
+      ADMIN_DATABASE: /srv/state/admin.sqlite3
+      CONTENT_ROOT: /srv/content
+      GENERATED_ROOT: /srv/generated
+      MEDIA_ROOT: /srv/media
+      MANAGED_ROOT: /srv/managed
+      BACKUP_ROOT: /srv/backups
+    volumes:
+      - admin-state:/srv/state
+      - ./content:/srv/content
+      - ./generated:/srv/generated
+      - ./managed:/srv/managed
+      - ./media:/srv/media
+      - ./backups:/srv/backups
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; r=urllib.request.Request('http://127.0.0.1:8000/healthz/', headers={'Host':'admin.2264.eu','X-Forwarded-Proto':'https'}); urllib.request.urlopen(r, timeout=2)"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+  admin-jobs:
+    build: ./admin-web
+    container_name: 2264-admin-jobs
+    init: true
+    user: "2264:2264"
+    entrypoint: []
+    command: ["python", "manage.py", "runjobs"]
+    depends_on:
+      admin-web:
+        condition: service_healthy
+    network_mode: none
+    env_file:
+      - path: .env.admin
+        required: true
+    environment:
+      ADMIN_DATABASE: /srv/state/admin.sqlite3
+      CONTENT_ROOT: /srv/content
+      GENERATED_ROOT: /srv/generated
+      MEDIA_ROOT: /srv/media
+      MANAGED_ROOT: /srv/managed
+      BACKUP_ROOT: /srv/backups
+      BLOG_STATS_DATABASE: /srv/blog-stats/views.sqlite3
+      RESTIC_PASSWORD_FILE: /run/secrets/restic-password
+      RESTIC_CACHE_DIR: /tmp/restic-cache
+    volumes:
+      - admin-state:/srv/state
+      - ./content:/srv/content
+      - ./generated:/srv/generated
+      - ./managed:/srv/managed
+      - ./media:/srv/media
+      - ./backups:/srv/backups
+      - blog-stats-data:/srv/blog-stats:ro
+      - ./secrets/restic-password:/run/secrets/restic-password:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
 volumes:
   blog-stats-data:
+  admin-state:
 
 networks:
   nginx-docker:

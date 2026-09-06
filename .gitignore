@@ -15,9 +15,9 @@ logs/
 npm-debug.log*
 
 
-.env
-.env.local
-.env.*.local
+# Local environment files. Keep every environment variant out of a public repo,
+# including otherwise-safe examples that reveal deployment details or owner data.
+.env*
 
 
 node_modules/
@@ -31,6 +31,7 @@ out/
 
 *.conf
 !nginx.conf
+!deploy/*.conf
 nginx.pid
 nginx.lock
 
@@ -49,8 +50,71 @@ config.dev.js
 *.backup
 *.[0-9] 
 
+# Credentials, certificates, private keys, and encrypted/local secret stores.
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.age
+*.gpg
+*.secret
+.secrets/
+secrets/
+
 html/src/Tweaks.zip
 html/src/media/
 html/src/drivers/
 certs/
 .htpasswd
+
+admin-state/
+
+# File-backed content is production data (including unpublished drafts), not
+# application source. It stays on the server and is backed up separately.
+content/
+content/published/
+
+backups/*
+!backups/.gitkeep
+# Generated releases and local runtime state.
+generated/current
+generated/.publish.lock
+generated/releases/*
+!generated/releases/.gitkeep
+managed/public/*
+!managed/public/.gitkeep
+managed/staging/*
+!managed/staging/.gitkeep
+managed/trash/*
+!managed/trash/.gitkeep
+media/public/*
+!media/public/.gitkeep
+media/staging/*
+!media/staging/.gitkeep
+media/trash/*
+!media/trash/.gitkeep
+*.sqlite3
+*.sqlite
+*.db
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Keep deployment notes and operator instructions local. Executable deployment
+# scripts and source configuration remain reviewable; these documentation files
+# must not be pushed to the public repository.
+**/README*
+**/readme*
+**/INSTRUCTIONS*
+**/instructions*
+**/AGENTS.md
+**/RUNBOOK*
+**/runbook*
+
+# Temporary host-specific Nginx candidate generated during rollout.
+deploy/nginx.conf.next

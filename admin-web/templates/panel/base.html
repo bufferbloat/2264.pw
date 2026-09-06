@@ -1,0 +1,27 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+    <title>{% block title %}Dashboard{% endblock %} · Webmaster</title>
+    <link rel="stylesheet" href="{% static 'panel/admin.css' %}"><script src="{% static 'panel/admin.js' %}" defer></script>
+</head>
+<body data-csrf="{{ csrf_token }}">
+{% if request.user.is_authenticated %}<div class="app-shell"><aside class="sidebar">
+<a class="brand" href="{% url 'dashboard' %}"><img class="brand-logo" src="{% static 'panel/logo.png' %}" alt="2264"><span class="brand-copy">Webmaster<small>Control panel</small></span></a>
+<nav class="sidebar-nav" aria-label="Main navigation"><span class="nav-label">Workspace</span>
+<a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><span class="nav-icon">⌂</span><span class="nav-text">Overview</span></a>
+<a class="nav-link {% if request.resolver_match.url_name == 'post_list' or request.resolver_match.url_name == 'post_edit' or request.resolver_match.url_name == 'post_create' %}active{% endif %}" href="{% url 'post_list' %}"><span class="nav-icon">▤</span><span class="nav-text">Posts</span></a>
+<a class="nav-link {% if request.resolver_match.url_name == 'resources_edit' or request.resolver_match.url_name == 'resources_preview' %}active{% endif %}" href="{% url 'resources_edit' %}"><span class="nav-icon">≡</span><span class="nav-text">Resources</span></a>
+<a class="nav-link {% if request.resolver_match.url_name == 'media_library' or request.resolver_match.url_name == 'media_upload' %}active{% endif %}" href="{% url 'media_library' %}"><span class="nav-icon">▧</span><span class="nav-text">Media</span></a>
+<a class="nav-link {% if request.resolver_match.url_name == 'files' or request.resolver_match.url_name == 'file_download' %}active{% endif %}" href="{% url 'files' %}"><span class="nav-icon">□</span><span class="nav-text">Files</span></a>
+<span class="nav-label nav-label-spaced">System</span>
+<a class="nav-link {% if request.resolver_match.url_name == 'trash' or request.resolver_match.url_name == 'trash_restore' %}active{% endif %}" href="{% url 'trash' %}"><span class="nav-icon">⌫</span><span class="nav-text">Trash</span></a>
+</nav>
+<button type="button" id="sidebar-toggle" class="sidebar-toggle" aria-expanded="true" aria-label="Collapse sidebar"><span class="nav-icon">«</span><span class="toggle-label">Collapse sidebar</span></button>
+<div class="sidebar-footer"><a class="site-link" href="https://2264.eu" target="_blank" rel="noopener"><span>View public site</span><span>↗</span></a>
+<form action="{% url 'logout' %}" method="post">{% csrf_token %}<button class="nav-link sign-out"><span class="nav-icon">⇥</span><span class="nav-text">Sign out</span></button></form></div>
+</aside><div class="app-main"><header class="mobile-header"><a class="brand" href="{% url 'dashboard' %}"><img class="brand-logo" src="{% static 'panel/logo.png' %}" alt="2264"><span class="brand-copy">Webmaster<small>Control panel</small></span></a><a class="mobile-site" href="https://2264.eu" target="_blank" rel="noopener">↗</a></header>{% endif %}
+<main class="shell {% block shell_class %}{% endblock %}">
+{% if messages %}<div class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}</main>{% if request.user.is_authenticated %}</div></div>{% endif %}
+</body></html>

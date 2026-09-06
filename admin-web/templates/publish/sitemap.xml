@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>{{ origin }}/</loc></url>
+    <url><loc>{{ origin }}/blog</loc></url>
+{% for post in posts %}    <url><loc>{{ origin }}/blog/{{ post.slug }}</loc><lastmod>{{ post.updated_at|date:"c" }}</lastmod></url>
+{% endfor %}    <url><loc>{{ origin }}/files</loc></url>
+    <url><loc>{{ origin }}/links</loc></url>
+    <url><loc>{{ origin }}/links/resources</loc></url>
+    <url><loc>{{ origin }}/krokmou</loc></url>
+</urlset>

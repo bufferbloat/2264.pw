@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1100, initial-scale=1">
+    <title>{{ post.title }}</title>
+    <link rel="canonical" href="{{ origin }}/blog/{{ post.slug }}">
+    <link rel="stylesheet" href="{{ origin }}/css/base.css?v=20260904d">
+    <link rel="stylesheet" href="{{ origin }}/css/post.css?v=20260906g">
+    <script src="{{ origin }}/js/site.js?v=20260904a" defer></script>
+    <script src="{{ origin }}/js/blog-stats.js?v=20260906b" defer></script>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="homepage-banner" aria-hidden="true">
+        <img src="{{ origin }}/assets/img/banners/bannerhomepage.png?v=20260903c" alt="" width="900" height="200">
+    </div>
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+        <main class="post-page page-layer">
+        <article class="post-container" data-post-slug="{{ post.slug }}">
+            <nav class="post-path" aria-label="Blog path">
+                <a href="{{ origin }}/blog">blog</a><span aria-hidden="true">&gt;</span><span aria-current="page">post</span>
+            </nav>
+            <div class="post-card">
+                <header class="post-header">
+                    <div class="post-heading">
+                        <h1 class="post-title">{{ post.title }}</h1>
+                        <div class="post-date">{{ post.published_at|date:"l, j F Y" }}</div>
+                    </div>
+                    <div class="post-stats" hidden>
+                        <div class="post-views">
+                            <svg class="post-stat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            <output data-view-count></output>
+                        </div>
+                        <button class="post-like" type="button" aria-pressed="false">
+                            <svg class="post-stat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path></svg>
+                            <output data-like-count></output>
+                        </button>
+                    </div>
+                </header>
+                <section class="post-content">{{ body_html|safe }}</section>
+            </div>
+        </article>
+        <p class="post-contact">Got a question or just wanna reach out? Mail me at <a href="mailto:bufferbloat@2264.eu">bufferbloat@2264.eu</a>.</p>
+        </main>
+    </div>
+    <!--# include virtual="/components/footer.html" -->
+</body>
+</html>

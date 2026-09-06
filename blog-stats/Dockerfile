@@ -6,6 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 COPY server.py /app/server.py
+COPY test_server.py /app/test_server.py
 
 RUN addgroup -S blogstats \
     && adduser -S -G blogstats blogstats \

@@ -16,10 +16,12 @@ DATABASE_PATH = Path(os.environ.get("BLOG_STATS_DATABASE", "/data/views.sqlite3"
 SECRET_PATH = Path(os.environ.get("BLOG_STATS_SECRET_FILE", "/data/cookie-secret"))
 POSTS_DIRECTORY = Path(os.environ.get("BLOG_POSTS_DIRECTORY", "/posts"))
 PORT = int(os.environ.get("BLOG_STATS_PORT", "8080"))
+INTERNAL_TOKEN = os.environ.get("BLOG_STATS_INTERNAL_TOKEN") or os.environ.get("STATS_INTERNAL_TOKEN", "")
 COOKIE_NAME = "blog_visitor"
 COOKIE_MAX_AGE = 34_560_000  # 400 days, the practical browser maximum.
 VIEW_PATH = re.compile(r"^/posts/([a-zA-Z0-9_-]+)/view$")
 LIKE_PATH = re.compile(r"^/posts/([a-zA-Z0-9_-]+)/like$")
+REDIRECT_PATH = re.compile(r"^/redirects/([a-zA-Z0-9_-]+)$")
 
 
 def load_or_create_secret():
@@ -59,6 +61,15 @@ def initialize_database():
                 visitor_id TEXT NOT NULL,
                 viewed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 PRIMARY KEY (post_slug, visitor_id)
+            )
+            """
+        )
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS post_redirects (
+                old_slug TEXT PRIMARY KEY,
+                new_slug TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
             """
         )
@@ -127,6 +138,53 @@ def get_all_view_counts():
     return view_counts
 
 
+def get_all_stats():
+    slugs = {
+        post_file.stem
+        for post_file in POSTS_DIRECTORY.glob("*.html")
+        if re.fullmatch(r"[a-zA-Z0-9_-]+", post_file.stem)
+    }
+    with connect_database() as connection:
+        slugs.update(row[0] for row in connection.execute("SELECT DISTINCT post_slug FROM post_views"))
+        slugs.update(row[0] for row in connection.execute("SELECT DISTINCT post_slug FROM post_likes"))
+        result = {}
+        for slug in sorted(slugs):
+            views = connection.execute("SELECT COUNT(*) FROM post_views WHERE post_slug = ?", (slug,)).fetchone()[0]
+            likes = connection.execute("SELECT COUNT(*) FROM post_likes WHERE post_slug = ?", (slug,)).fetchone()[0]
+            result[slug] = {"views": views, "likes": likes}
+    return result
+
+
+def rename_post(old_slug, new_slug, rollback=False):
+    with connect_database() as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        connection.execute(
+            "INSERT OR IGNORE INTO post_views (post_slug, visitor_id, viewed_at) SELECT ?, visitor_id, viewed_at FROM post_views WHERE post_slug = ?",
+            (new_slug, old_slug),
+        )
+        connection.execute(
+            "INSERT OR IGNORE INTO post_likes (post_slug, visitor_id, liked_at) SELECT ?, visitor_id, liked_at FROM post_likes WHERE post_slug = ?",
+            (new_slug, old_slug),
+        )
+        connection.execute("DELETE FROM post_views WHERE post_slug = ?", (old_slug,))
+        connection.execute("DELETE FROM post_likes WHERE post_slug = ?", (old_slug,))
+        connection.execute("UPDATE post_redirects SET new_slug = ? WHERE new_slug = ?", (new_slug, old_slug))
+        if rollback:
+            connection.execute("DELETE FROM post_redirects WHERE old_slug = ?", (new_slug,))
+        else:
+            connection.execute(
+                "INSERT INTO post_redirects (old_slug, new_slug) VALUES (?, ?) ON CONFLICT(old_slug) DO UPDATE SET new_slug=excluded.new_slug",
+                (old_slug, new_slug),
+            )
+            connection.execute("DELETE FROM post_redirects WHERE old_slug = ?", (new_slug,))
+
+
+def redirect_for(old_slug):
+    with connect_database() as connection:
+        row = connection.execute("SELECT new_slug FROM post_redirects WHERE old_slug = ?", (old_slug,)).fetchone()
+    return row[0] if row else None
+
+
 def record_view(post_slug, visitor_id):
     with connect_database() as connection:
         cursor = connection.execute(
@@ -160,7 +218,7 @@ class BlogStatsServer(ThreadingHTTPServer):
 
 class RequestHandler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
-    server_version = "2264BlogStats/1.2"
+    server_version = "2264BlogStats/2.0"
 
     def send_json(self, status, payload, visitor_token=None):
         response = json.dumps(payload, separators=(",", ":")).encode("utf-8")
@@ -195,7 +253,49 @@ class RequestHandler(BaseHTTPRequestHandler):
                 return
             self.send_json(200, {"views": view_counts})
             return
+        match = REDIRECT_PATH.fullmatch(unquote(path))
+        if match:
+            try:
+                destination = redirect_for(match.group(1))
+            except sqlite3.Error:
+                self.send_json(503, {"error": "redirect lookup unavailable"})
+                return
+            if not destination:
+                self.send_json(404, {"error": "not found"})
+                return
+            self.send_response(308)
+            self.send_header("Location", f"/blog/{destination}")
+            self.send_header("Content-Length", "0")
+            self.send_header("Cache-Control", "public, max-age=300")
+            self.end_headers()
+            return
+        if path == "/internal/posts/stats":
+            if not self.authorized_internal():
+                return
+            try:
+                self.send_json(200, {"posts": get_all_stats()})
+            except sqlite3.Error:
+                self.send_json(503, {"error": "post statistics unavailable"})
+            return
         self.send_json(404, {"error": "not found"})
+
+    def authorized_internal(self):
+        supplied = self.headers.get("Authorization", "")
+        expected = f"Bearer {INTERNAL_TOKEN}"
+        if not INTERNAL_TOKEN or not hmac.compare_digest(supplied, expected):
+            self.send_json(403, {"error": "forbidden"})
+            return False
+        return True
+
+    def read_json(self, maximum=4096):
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+            if length < 0 or length > maximum:
+                raise ValueError
+            return json.loads(self.rfile.read(length))
+        except (ValueError, json.JSONDecodeError, UnicodeDecodeError):
+            self.send_json(400, {"error": "invalid JSON"})
+            return None
 
     def get_post_slug(self, path_pattern):
         path = unquote(urlsplit(self.path).path)
@@ -208,7 +308,13 @@ class RequestHandler(BaseHTTPRequestHandler):
         if not (POSTS_DIRECTORY / f"{post_slug}.html").is_file():
             self.send_json(404, {"error": "unknown post"})
             return None
-        return post_slug
+        # Once a rename transaction starts, keep any in-flight requests from the
+        # still-active old HTML release writing fresh rows under the old slug.
+        try:
+            return redirect_for(post_slug) or post_slug
+        except sqlite3.Error:
+            self.send_json(503, {"error": "post statistics unavailable"})
+            return None
 
     def get_visitor(self):
         cookie = SimpleCookie()
@@ -225,6 +331,24 @@ class RequestHandler(BaseHTTPRequestHandler):
         return visitor_id, visitor_token
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/internal/posts/rename":
+            if not self.authorized_internal():
+                return
+            payload = self.read_json()
+            if payload is None:
+                return
+            old_slug = str(payload.get("old_slug", ""))
+            new_slug = str(payload.get("new_slug", ""))
+            if old_slug == new_slug or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", old_slug) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", new_slug):
+                self.send_json(400, {"error": "invalid slugs"})
+                return
+            try:
+                rename_post(old_slug, new_slug, bool(payload.get("rollback")))
+            except sqlite3.Error:
+                self.send_json(503, {"error": "rename synchronization failed"})
+                return
+            self.send_json(200, {"old_slug": old_slug, "new_slug": new_slug})
+            return
         if self.headers.get("X-Blog-View") != "1":
             self.send_json(403, {"error": "forbidden"})
             return

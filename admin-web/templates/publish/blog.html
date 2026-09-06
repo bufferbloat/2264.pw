@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=1100, initial-scale=1">
+    <title>blog</title>
+    <link rel="canonical" href="{{ origin }}/blog">
+    <link rel="stylesheet" href="/css/base.css?v=20260904d"><link rel="stylesheet" href="/css/blog.css?v=20260906d">
+    <script src="/js/site.js?v=20260904a" defer></script><script src="/js/blog-stats.js?v=20260906b" defer></script>
+</head>
+<body>
+<div class="stars"></div>
+<div class="blog-banner" aria-hidden="true"><img src="/assets/img/banners/blogbanner2.png?v=20260903a" alt="" width="900" height="200"></div>
+<div class="site-layout">
+<!--# include virtual="/components/navigation.html" -->
+<main class="blog-page page-layer"><div class="blog-list">
+{% regroup posts by published_at.year as year_groups %}{% for year in year_groups %}
+<section class="year-section"><div class="year-separator"><span>{{ year.grouper }}</span></div>
+{% for post in year.list %}<a href="/blog/{{ post.slug }}" class="blog-post" data-post-slug="{{ post.slug }}">
+<div class="post-title-group"><div class="post-title">{{ post.title }}</div><p class="post-preview">{{ post.excerpt }}</p></div>
+<div class="post-meta"><div class="post-date">{{ post.published_at|date:"d.m.Y" }}</div><div class="post-card-views" hidden>
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg><output data-card-view-count></output>
+</div></div></a>{% endfor %}</section>{% endfor %}
+</div></main></div>
+<!--# include virtual="/components/footer.html" -->
+</body></html>

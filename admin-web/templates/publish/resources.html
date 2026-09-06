@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=1100, initial-scale=1"><title>{{ resources.title }}</title><link rel="canonical" href="{{ origin }}/links/resources">
+    <link rel="stylesheet" href="{{ origin }}/css/base.css?v=20260904d"><link rel="stylesheet" href="{{ origin }}/css/links.css?v=20260904d"><link rel="icon" href="{{ origin }}/favicon.ico" type="image/x-icon"><script src="{{ origin }}/js/site.js?v=20260904a" defer></script>
+</head>
+<body><div class="stars"></div>
+<div class="homepage-banner" aria-hidden="true"><img src="{{ origin }}/assets/img/banners/bannerhomepage.png?v=20260903c" alt="" width="900" height="200"></div>
+<div class="site-layout"><!--# include virtual="/components/navigation.html" -->
+<main class="resources-page page-layer"><div class="resources-content"><section class="links-container resources-container" aria-labelledby="resources-title">
+<h1 id="resources-title">{{ resources.title }}</h1><p class="container-description">{{ resources.description }}</p><div class="resources-list">
+{% for category in resources.categories %}{% if category.visible %}<section class="resource-group" style="--category-color: {{ category.color }}" aria-labelledby="category-{{ category.id }}">
+<header class="resource-category"><h2 id="category-{{ category.id }}">{{ category.name }}</h2><p>{{ category.description }}</p></header><div class="resource-entries">
+{% for entry in category.entries %}{% if entry.visible %}<div class="resource-entry"><a class="resource-title" href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">{{ entry.title }}</a><p class="resource-description">{{ entry.description }}</p></div>{% endif %}{% endfor %}
+</div></section>{% endif %}{% endfor %}</div>
+</section></div></main></div><!--# include virtual="/components/footer.html" --></body></html>

@@ -1,0 +1,4 @@
+{% extends "panel/base.html" %}{% block title %}sign in{% endblock %}{% block shell_class %}login-shell{% endblock %}
+{% block content %}<section class="login-card panel"><h1>2264 webmaster</h1><p class="muted">Cloudflare Access verified this request. Complete the owner login.</p>
+{% if error %}<div class="message error">{{ error }}</div>{% endif %}
+<form method="post" class="stack">{% csrf_token %}<label>Email<input type="email" name="email" value="{{ owner_email }}" autocomplete="username" readonly></label><label>Password<input type="password" name="password" autocomplete="current-password" required autofocus></label><label>Authenticator or recovery code<input type="text" name="token" autocomplete="one-time-code" inputmode="numeric" required></label><button class="primary" type="submit">Enter panel</button></form></section>{% endblock %}
