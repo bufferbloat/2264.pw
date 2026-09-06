@@ -106,6 +106,7 @@ MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", "/srv/media"))
 MANAGED_ROOT = Path(os.environ.get("MANAGED_ROOT", "/srv/managed"))
 BACKUP_ROOT = Path(os.environ.get("BACKUP_ROOT", "/srv/backups"))
 PUBLIC_SITE_ORIGIN = os.environ.get("PUBLIC_SITE_ORIGIN", "https://2264.eu").rstrip("/")
+PUBLIC_HTML_ROOT = Path(os.environ.get("PUBLIC_HTML_ROOT", "/srv/html"))
 UPLOAD_CHUNK_SIZE = 16 * 1024 * 1024
 MAX_UPLOAD_SIZE = int(os.environ.get("MAX_UPLOAD_SIZE", str(10 * 1024**3)))
 MIN_FREE_BYTES = int(os.environ.get("MIN_FREE_BYTES", str(10 * 1024**3)))

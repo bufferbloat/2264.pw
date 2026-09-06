@@ -26,6 +26,41 @@ ALLOWED_ATTRIBUTES = {
     "code": ["class"],
 }
 
+# Routes produced by the publisher or represented by the existing public site.
+# Additional root-level HTML pages are discovered from PUBLIC_HTML_ROOT below.
+BASE_SITEMAP_PAGES = (
+    ("/", "home"),
+    ("/about", "about"),
+    ("/blog", "blog"),
+    ("/links/resources", "resources"),
+    ("/links", "links"),
+    ("/files", "files"),
+    ("/krokmou", "krokmou"),
+    ("/sitemap", "sitemap"),
+)
+SITEMAP_EXCLUDED_HTML = {"404", "blog", "index", "sitemap"}
+
+
+def sitemap_pages():
+    pages = [{"path": path, "label": label, "has_posts": path == "/blog"} for path, label in BASE_SITEMAP_PAGES]
+    known_paths = {page["path"] for page in pages}
+    html_root = getattr(settings, "PUBLIC_HTML_ROOT", Path("/srv/html"))
+    try:
+        candidates = sorted(html_root.glob("*.html"), key=lambda path: path.name.lower())
+    except OSError:
+        candidates = []
+    insertion_index = next((index for index, page in enumerate(pages) if page["path"] == "/sitemap"), len(pages))
+    for path in candidates:
+        if path.stem in SITEMAP_EXCLUDED_HTML:
+            continue
+        route = f"/{path.stem}"
+        if route in known_paths:
+            continue
+        pages.insert(insertion_index, {"path": route, "label": path.stem.replace("-", " "), "has_posts": False})
+        insertion_index += 1
+        known_paths.add(route)
+    return pages
+
 
 def render_markdown(source):
     rendered = markdown.markdown(source, extensions=["extra", "sane_lists"])
@@ -69,7 +104,13 @@ def prepare_release():
         _write(temporary / "blog.html", render_to_string("publish/blog.html", {"posts": published, "origin": settings.PUBLIC_SITE_ORIGIN}))
         resources = load_published_resources()
         _write(temporary / "links" / "resources.html", render_to_string("publish/resources.html", {"resources": resources, "origin": settings.PUBLIC_SITE_ORIGIN}))
-        _write(temporary / "sitemap.xml", render_to_string("publish/sitemap.xml", {"posts": published, "origin": settings.PUBLIC_SITE_ORIGIN}))
+        pages = sitemap_pages()
+        _write(temporary / "sitemap.html", render_to_string("publish/sitemap.html", {
+            "pages": pages, "posts": published, "origin": settings.PUBLIC_SITE_ORIGIN,
+        }))
+        _write(temporary / "sitemap.xml", render_to_string("publish/sitemap.xml", {
+            "pages": pages, "posts": published, "origin": settings.PUBLIC_SITE_ORIGIN,
+        }))
         manifest = {
             "release": release_name,
             "posts": [{"id": post.id, "slug": post.slug, "updated_at": post.updated_at.astimezone(timezone.utc).isoformat()} for post in published],

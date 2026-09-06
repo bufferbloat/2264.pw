@@ -70,7 +70,7 @@
 .blog-post {
     display: flex;
     min-height: 128px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
     padding: 17px 22px;
@@ -125,6 +125,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 6px;
+    margin-top: 1px;
 }
 
 .post-card-views {

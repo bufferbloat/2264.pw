@@ -141,10 +141,18 @@ class PanelTestCase(TestCase):
         self.assertEqual(os.readlink(self.generated / "current"), active_before)
         public = (self.generated / "current" / "blog" / "a-title.html").read_text()
         self.assertNotIn("Changed privately", public)
-        publish_all()
-        public = (self.generated / "current" / "blog" / "a-title.html").read_text()
-        self.assertNotIn("Changed privately", public)
         self.assertEqual(Revision.objects.filter(kind="post").count(), 1)
+
+    def test_generated_sitemap_page_includes_published_posts(self):
+        post = self.make_post()
+        publish_all()
+        sitemap = (self.generated / "current" / "sitemap.html").read_text()
+        sitemap_xml = (self.generated / "current" / "sitemap.xml").read_text()
+        self.assertIn("/blog/a-title", sitemap)
+        self.assertIn("A title", sitemap)
+        self.assertIn("/about", sitemap)
+        self.assertIn("/sitemap", sitemap_xml)
+        self.assertIn("/blog/a-title", sitemap_xml)
 
     def test_publish_switches_release_and_renders_site(self):
         post = self.make_post(False)

@@ -69,6 +69,7 @@ services:
     volumes:
       - admin-state:/srv/state
       - ./content:/srv/content
+      - ./html:/srv/html:ro
       - ./generated:/srv/generated
       - ./managed:/srv/managed
       - ./media:/srv/media

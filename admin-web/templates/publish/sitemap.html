@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1100, initial-scale=1">
+    <title>sitemap</title>
+    <link rel="canonical" href="{{ origin }}/sitemap">
+    <link rel="stylesheet" href="/css/base.css?v=20260904d">
+    <link rel="stylesheet" href="/css/sitemap.css?v=20260904b">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script src="/js/site.js?v=20260904a" defer></script>
+</head>
+<body class="sitemap-body">
+    <div class="stars"></div>
+    <div class="homepage-banner" aria-hidden="true">
+        <img src="/assets/img/banners/bannerhomepage.png?v=20260903c" alt="" width="900" height="200">
+    </div>
+    <div class="site-layout">
+        <!--# include virtual="/components/navigation.html" -->
+        <main class="sitemap-page page-layer">
+            <section aria-labelledby="sitemap-title">
+                <h1 id="sitemap-title">sitemap</h1>
+                <ul class="sitemap-list">
+                {% for page in pages %}
+                    <li>
+                        <a href="{{ origin }}{{ page.path }}"{% if page.path == "/sitemap" %} aria-current="page"{% endif %}>{{ page.label }}</a>
+                        {% if page.has_posts and posts %}<ul>
+                            {% for post in posts %}<li><a href="{{ origin }}/blog/{{ post.slug }}">{{ post.title }}</a></li>{% endfor %}
+                        </ul>{% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
